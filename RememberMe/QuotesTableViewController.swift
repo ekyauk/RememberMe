@@ -22,16 +22,18 @@ class QuotesTableViewController: UITableViewController {
     var quotes = [[Quote]]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        quotes.insert([], atIndex: 0)
         loadData()
+        let fetchRequest = NSFetchRequest(entityName: "Quote")
+        if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Quote] {
+            quotes.insert(fetchResults, atIndex: 0)
+        }
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
-
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -52,18 +54,31 @@ class QuotesTableViewController: UITableViewController {
     
     private func loadData() {
         for var i: Int = 0; i < 10; ++i {
-            quotes[0].insert(createQuote("Quote \(i)", text: "hello!!"), atIndex: i)
+            createQuote("Quote \(i)", text: "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.\nNow we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.\nBut, in a larger sense, we can not dedicate -- we can not consecrate -- we can not hallow -- this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us -- that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion -- that we here highly resolve that these dead shall not have died in vain -- that this nation, under God, shall have a new birth of freedom -- and that government of the people, by the people, for the people, shall not perish from the earth.")
         }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.text = quotes[indexPath.section][indexPath.row].title
-        cell.detailTextLabel?.text = quotes[indexPath.section][indexPath.row].text
+        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as QuoteTableViewCell
+        cell.quote = quotes[indexPath.section][indexPath.row]
         return cell
     }
 
-
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "quoteDetail" {
+            var destination = segue.destinationViewController as? UIViewController
+            if let navCon = destination as? UINavigationController {
+                destination = navCon.visibleViewController
+            }
+            if let quoteDetail = destination as? QuoteDetailViewController {
+                if let quoteCell = sender as? QuoteTableViewCell {
+                    if let quote = quoteCell.quote {
+                        quoteDetail.quote = quoteCell.quote!
+                    }
+                }
+            }
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
