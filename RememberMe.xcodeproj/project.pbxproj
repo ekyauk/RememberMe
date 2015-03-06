@@ -17,7 +17,7 @@
 		70C2E1031AA66BDB00DD09B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70C2E1021AA66BDB00DD09B8 /* Images.xcassets */; };
 		70C2E1061AA66BDB00DD09B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C2E1041AA66BDB00DD09B8 /* LaunchScreen.xib */; };
 		70C2E1121AA66BDB00DD09B8 /* RememberMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C2E1111AA66BDB00DD09B8 /* RememberMeTests.swift */; };
-		70ED443C1AA787BE000842C4 /* QuoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED443B1AA787BE000842C4 /* QuoteDetailView.swift */; };
+		70D4CAAC1AA9294B001DAD20 /* StudyQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D4CAAB1AA9294B001DAD20 /* StudyQuoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,7 @@
 		70C2E10B1AA66BDB00DD09B8 /* RememberMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememberMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70C2E1101AA66BDB00DD09B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70C2E1111AA66BDB00DD09B8 /* RememberMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberMeTests.swift; sourceTree = "<group>"; };
-		70ED443B1AA787BE000842C4 /* QuoteDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteDetailView.swift; sourceTree = "<group>"; };
+		70D4CAAB1AA9294B001DAD20 /* StudyQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQuoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +92,7 @@
 				70C2E0F81AA66BDA00DD09B8 /* AppDelegate.swift */,
 				705BABCF1AA66C80003A20C5 /* QuotesTableViewController.swift */,
 				70C2E0FF1AA66BDB00DD09B8 /* Main.storyboard */,
-				70ED443B1AA787BE000842C4 /* QuoteDetailView.swift */,
+				70D4CAAB1AA9294B001DAD20 /* StudyQuoteViewController.swift */,
 				70C2E1021AA66BDB00DD09B8 /* Images.xcassets */,
 				70C2E1041AA66BDB00DD09B8 /* LaunchScreen.xib */,
 				70C2E0FA1AA66BDA00DD09B8 /* RememberMe.xcdatamodeld */,
@@ -228,12 +228,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7018F78C1AA6BA8600364B85 /* QuoteDetailViewController.swift in Sources */,
-				70ED443C1AA787BE000842C4 /* QuoteDetailView.swift in Sources */,
 				70C2E0FC1AA66BDB00DD09B8 /* RememberMe.xcdatamodeld in Sources */,
 				7018F78E1AA6BE6300364B85 /* QuoteTableViewCell.swift in Sources */,
 				705BABD01AA66C80003A20C5 /* QuotesTableViewController.swift in Sources */,
 				705BABD21AA66D1C003A20C5 /* Quote.swift in Sources */,
 				70C2E0F91AA66BDA00DD09B8 /* AppDelegate.swift in Sources */,
+				70D4CAAC1AA9294B001DAD20 /* StudyQuoteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

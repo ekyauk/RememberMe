@@ -10,7 +10,6 @@ import UIKit
 
 class QuoteDetailViewController: UIViewController {
 
-    @IBOutlet var quoteDetailView: QuoteDetailView!
     var quote: Quote?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,10 +17,29 @@ class QuoteDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBOutlet weak var quoteTitle: UILabel!
+    @IBOutlet weak var quoteText: UITextView!
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        quoteDetailView.quote = quote
+        quoteTitle.text = quote?.title
+        quoteText.text = quote?.text
 
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let identifier = segue.identifier {
+            if identifier == "studyQuote" {
+                var destination = segue.destinationViewController as? UIViewController
+                if let navCon = destination as? UINavigationController {
+                    destination = navCon.visibleViewController
+                }
+                if let studyQuote = destination as? StudyQuoteViewController {
+                    studyQuote.quote = quote
+                }
+            
+            }
+        }
     }
     /*
     // MARK: - Navigation

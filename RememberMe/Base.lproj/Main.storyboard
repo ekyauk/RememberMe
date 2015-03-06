@@ -74,7 +74,7 @@
                         <viewControllerLayoutGuide type="top" id="5LB-wQ-6dl"/>
                         <viewControllerLayoutGuide type="bottom" id="HEL-Xw-4ya"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="AaM-px-qv5" customClass="QuoteDetailView" customModule="RememberMe" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="AaM-px-qv5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -89,6 +89,9 @@
                                 <state key="normal" title="Memorize!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="rCH-Tk-dw9" kind="show" identifier="studyQuote" id="cXe-WO-ci0"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Quote" translatesAutoresizingMaskIntoConstraints="NO" id="Srn-BV-jNx">
                                 <rect key="frame" x="16" y="39.5" width="568" height="373"/>
@@ -109,23 +112,20 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Srn-BV-jNx" secondAttribute="trailing" id="tXk-a7-1J9"/>
                             <constraint firstAttribute="centerX" secondItem="mke-c0-Nyy" secondAttribute="centerX" id="zZR-a5-cNi"/>
                         </constraints>
-                        <connections>
-                            <outlet property="quoteText" destination="Srn-BV-jNx" id="XZW-7I-6S7"/>
-                            <outlet property="quoteTitle" destination="736-wj-Kue" id="b8j-Bn-MkV"/>
-                        </connections>
                     </view>
                     <connections>
-                        <outlet property="quoteDetailView" destination="AaM-px-qv5" id="g6r-CQ-d7W"/>
+                        <outlet property="quoteText" destination="Srn-BV-jNx" id="bzU-0w-SKh"/>
+                        <outlet property="quoteTitle" destination="736-wj-Kue" id="bar-w7-rOU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t82-XR-gk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="664" y="-242"/>
         </scene>
-        <!--View Controller-->
+        <!--Study Quote View Controller-->
         <scene sceneID="kGg-UD-Xhc">
             <objects>
-                <viewController id="rCH-Tk-dw9" sceneMemberID="viewController">
+                <viewController id="rCH-Tk-dw9" customClass="StudyQuoteViewController" customModule="RememberMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="huO-AF-FST"/>
                         <viewControllerLayoutGuide type="bottom" id="bei-oy-TQg"/>
@@ -133,8 +133,33 @@
                     <view key="view" contentMode="scaleToFill" id="kiT-JQ-j8k">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XY-x1-5IP">
+                                <rect key="frame" x="16" y="20" width="568" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="no"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="6XY-x1-5IP" secondAttribute="trailing" id="BXW-AJ-gOl"/>
+                            <constraint firstItem="6XY-x1-5IP" firstAttribute="top" secondItem="huO-AF-FST" secondAttribute="bottom" id="C1z-Jc-FUC"/>
+                            <constraint firstItem="6XY-x1-5IP" firstAttribute="leading" secondItem="kiT-JQ-j8k" secondAttribute="leadingMargin" id="F5R-U2-Yks"/>
+                            <constraint firstItem="bei-oy-TQg" firstAttribute="top" secondItem="6XY-x1-5IP" secondAttribute="bottom" id="dC6-Ag-5Rt"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="quoteText" destination="6XY-x1-5IP" id="5pI-20-Spg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mab-Gy-fbY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
