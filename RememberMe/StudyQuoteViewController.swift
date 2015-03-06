@@ -11,7 +11,7 @@ import UIKit
 class StudyQuoteViewController: UIViewController {
 
     @IBOutlet weak var quoteText: UITextView!
-    
+
     private var guessedIndex = 0
     private struct QuoteWord {
         var text: String = ""
@@ -29,7 +29,7 @@ class StudyQuoteViewController: UIViewController {
             }
         }
     }
-    
+
     private func reloadQuote() {
         var blackText = ""
         var greyText = ""
@@ -55,6 +55,19 @@ class StudyQuoteViewController: UIViewController {
         attrText.addAttribute(NSForegroundColorAttributeName, value: UIColor.grayColor(), range: NSMakeRange(blackRange.length, countElements(greyText)))
         quoteText.attributedText = attrText
     }
+    
+    @IBAction func valueChanged(sender: UITextField) {
+        let letter = sender.text
+        sender.text = ""
+        if !letter.isEmpty && letter[0] == words[guessedIndex].text[0] {
+            words[guessedIndex].hidden = false
+            guessedIndex++
+            reloadQuote()
+        } else {
+            println("boo try again")
+        }
+    }
+
 
     override func viewWillAppear(animated: Bool) {
         reloadQuote()
@@ -81,4 +94,11 @@ class StudyQuoteViewController: UIViewController {
     }
     */
 
+}
+/* Taken from http://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language */
+
+extension String {
+    subscript (i: Int) -> Character {
+        return self[advance(self.startIndex, i)]
+    }
 }

@@ -134,8 +134,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cFr-Hq-zK0">
+                                <rect key="frame" x="16" y="570" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="valueChanged:" destination="rCH-Tk-dw9" eventType="editingChanged" id="aaS-GT-8pi"/>
+                                </connections>
+                            </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XY-x1-5IP">
-                                <rect key="frame" x="16" y="20" width="568" height="580"/>
+                                <rect key="frame" x="16" y="20" width="568" height="550"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -151,10 +159,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="cFr-Hq-zK0" firstAttribute="top" secondItem="6XY-x1-5IP" secondAttribute="bottom" id="9eb-mF-ZDT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6XY-x1-5IP" secondAttribute="trailing" id="BXW-AJ-gOl"/>
                             <constraint firstItem="6XY-x1-5IP" firstAttribute="top" secondItem="huO-AF-FST" secondAttribute="bottom" id="C1z-Jc-FUC"/>
                             <constraint firstItem="6XY-x1-5IP" firstAttribute="leading" secondItem="kiT-JQ-j8k" secondAttribute="leadingMargin" id="F5R-U2-Yks"/>
-                            <constraint firstItem="bei-oy-TQg" firstAttribute="top" secondItem="6XY-x1-5IP" secondAttribute="bottom" id="dC6-Ag-5Rt"/>
+                            <constraint firstItem="cFr-Hq-zK0" firstAttribute="leading" secondItem="kiT-JQ-j8k" secondAttribute="leadingMargin" id="WUh-Iz-ijv"/>
+                            <constraint firstItem="bei-oy-TQg" firstAttribute="top" secondItem="cFr-Hq-zK0" secondAttribute="bottom" id="npV-WH-R5W"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cFr-Hq-zK0" secondAttribute="trailing" id="zAv-QY-0hu"/>
                         </constraints>
                     </view>
                     <connections>
