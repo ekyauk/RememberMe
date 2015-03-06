@@ -59,10 +59,13 @@ class StudyQuoteViewController: UIViewController {
     @IBAction func valueChanged(sender: UITextField) {
         let letter = sender.text
         sender.text = ""
-        if !letter.isEmpty && letter[0] == words[guessedIndex].text[0] {
+        if !letter.isEmpty && letter.lowercaseString[0] == words[guessedIndex].text.lowercaseString[0] {
             words[guessedIndex].hidden = false
             guessedIndex++
             reloadQuote()
+            if guessedIndex == words.count {
+                //celebrate!
+            }
         } else {
             println("boo try again")
         }
