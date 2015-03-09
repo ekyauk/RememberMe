@@ -10,34 +10,111 @@ import UIKit
 
 class StudyQuoteViewController: UIViewController {
 
-    @IBOutlet weak var quoteText: UITextView!
-
-    private var guessedIndex = 0
     private struct QuoteWord {
         var text: String = ""
         var hidden: Bool = false
     }
 
-    private var words = [QuoteWord]()
+    // MARK: - Class Variables
+    @IBOutlet weak var quoteText: UITextView!
 
-    var quote: Quote? {
+    @IBOutlet weak var timeLabel: UILabel!
+    private var wrong = false
+    private var guessIndex = 0
+    private var timer = NSTimer()
+    private var currentDuration: NSTimeInterval? {
         didSet {
-            if let text = quote?.text {
-                words = split(text) { $0 == " " }.map {
-                    QuoteWord(text: $0, hidden: false)
+            if let duration = currentDuration {
+                if let label = timeLabel {
+                    label.text = timeToString(duration)
                 }
             }
+        }
+    }
+    private var prevTime = NSDate.timeIntervalSinceReferenceDate()
+    private var words = [QuoteWord]()
+    private lazy var revealedWords: [Int] = {
+        return Array(0...self.words.count-1)
+        }()
+    var quote: Quote? {
+        didSet {
+            if let q = quote {
+                words = split(q.text) { $0 == " " || $0 == "\n" }.map {
+                    QuoteWord(text: $0, hidden: false)
+                }
+                currentDuration = q.currentTime.timeIntervalSinceReferenceDate
+            }
+        }
+    }
+
+    //MARK: - Time Functions
+    
+    private func timeToString(time: NSTimeInterval) -> String {
+        var elapsedTime = time
+        let secondsPerMinute = 60.0
+        let minutesPerHour = 60.0
+        let hours = UInt8(elapsedTime/(secondsPerMinute * minutesPerHour))
+        elapsedTime -= NSTimeInterval(hours) * secondsPerMinute * minutesPerHour
+        let minutes = UInt8(elapsedTime/secondsPerMinute)
+        elapsedTime -= NSTimeInterval(minutes) * secondsPerMinute
+        let seconds = UInt8(elapsedTime)
+        let strHours = hours > 9 ? String(hours) : "0" + String(hours)
+        let strMinutes = minutes > 9 ? String(minutes) : "0" + String(minutes)
+        let strSeconds = seconds > 9 ? String(seconds) : "0" + String(seconds)
+        return "\(strHours):\(strMinutes):\(strSeconds)"
+    }
+    func updateTime() {
+        var currentTime = NSDate.timeIntervalSinceReferenceDate()
+        var elapsedTime = currentTime - prevTime
+        prevTime = currentTime
+        println(elapsedTime)
+        currentDuration = NSTimeInterval(currentDuration! + elapsedTime)
+    }
+
+    private func startTimer() {
+        let selector : Selector = "updateTime"
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: selector, userInfo: nil, repeats: true)
+        prevTime = NSDate.timeIntervalSinceReferenceDate()
+    }
+    
+    //MARK: - Quote Text Logic
+
+    private func binarySearch(numbers: [Int], target: Int, low: Int, high: Int) -> Bool {
+        let midpoint = (low + high)/2
+        if low > high {
+            return false
+        }
+        if numbers[midpoint] < target {
+            return binarySearch(numbers, target: target, low: midpoint + 1, high: high)
+        } else if numbers[midpoint] > target {
+            return binarySearch(numbers, target: target, low: low, high: midpoint - 1)
+        } else {
+            return true
+        }
+    }
+
+    private func binarySearch(numbers: [Int], target: Int) -> Bool {
+        return binarySearch(numbers, target: target, low: numbers.startIndex, high: numbers.endIndex)
+    }
+
+
+    
+    private func hideRandomWord() {
+        if (revealedWords.count > 0) {
+            let randomIndex = Int(arc4random_uniform(UInt32(revealedWords.count)))
+            let randomWordIndex = revealedWords[randomIndex]
+            revealedWords.removeAtIndex(randomIndex)
+            words[randomWordIndex].hidden = true
         }
     }
 
     private func reloadQuote() {
         var blackText = ""
         var greyText = ""
-        var fullText: NSString = ""
-        for var i: Int = 0; i < guessedIndex; ++i {
+        for var i: Int = 0; i < guessIndex; ++i {
             blackText += words[i].text + " " //guessed words should not be hidden
         }
-        for var i: Int = guessedIndex; i < words.count; ++i {
+        for var i: Int = guessIndex + 1; i < words.count; ++i {
             let word = words[i]
             if word.hidden {
                 greyText += "_____"
@@ -48,47 +125,80 @@ class StudyQuoteViewController: UIViewController {
                 greyText += " "
             }
         }
-        fullText = blackText + greyText
+        var guessWord = ""
+        if guessIndex < words.count {
+            if words[guessIndex].hidden {
+                guessWord = "_____"
+            } else {
+                guessWord = words[guessIndex].text
+            }
+        }
+        var fullText: NSString = blackText + guessWord + " " +  greyText
         var attrText = NSMutableAttributedString(string: fullText)
+        let guessWordLength = countElements(guessWord)
         let blackRange = fullText.rangeOfString(blackText)
+        
+        // Adds attributes to text
         attrText.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: blackRange)
-        attrText.addAttribute(NSForegroundColorAttributeName, value: UIColor.grayColor(), range: NSMakeRange(blackRange.length, countElements(greyText)))
+        var guessWordColor = UIColor.grayColor()
+        if wrong {
+            guessWordColor = UIColor.redColor()
+        }
+        attrText.addAttribute(NSForegroundColorAttributeName, value: guessWordColor, range: NSMakeRange(blackRange.length, guessWordLength))
+        attrText.addAttribute(NSForegroundColorAttributeName, value: UIColor.grayColor(), range: NSMakeRange(blackRange.length + guessWordLength, countElements(greyText)))
+
         quoteText.attributedText = attrText
     }
-    
+
+    private func resetText() {
+        guessIndex = 0
+        for var i: Int = 0; i < words.count; ++i {
+            if !binarySearch(revealedWords, target: i) {
+                words[i].hidden = true
+            }
+        }
+    }
+
     @IBAction func valueChanged(sender: UITextField) {
         let letter = sender.text
         sender.text = ""
-        if !letter.isEmpty && letter.lowercaseString[0] == words[guessedIndex].text.lowercaseString[0] {
-            words[guessedIndex].hidden = false
-            guessedIndex++
-            reloadQuote()
-            if guessedIndex == words.count {
-                //celebrate!
+        if !letter.isEmpty && letter.lowercaseString[0] == words[guessIndex].text.lowercaseString[0] {
+            wrong = false
+            guessIndex++
+
+
+            if guessIndex == words.count {
+                if revealedWords.count > 0 {
+                    hideRandomWord()
+                    resetText()
+                    reloadQuote()
+                } else {
+                    "Yayy"
+                }
+            } else {
+                reloadQuote()
+                words[guessIndex].hidden = false
             }
         } else {
+            wrong = true
+            reloadQuote()
             println("boo try again")
         }
     }
 
 
+    // MARK: - View Life Cycle
     override func viewWillAppear(animated: Bool) {
         reloadQuote()
+        startTimer()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
     /*
-    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
