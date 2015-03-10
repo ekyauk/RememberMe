@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import CoreData
+import AudioToolbox
 
 class StudyQuoteViewController: UIViewController {
+
+    // Retreive the managedObjectContext from AppDelegate
+    let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
 
     private struct QuoteWord {
         var text: String = ""
@@ -67,7 +72,6 @@ class StudyQuoteViewController: UIViewController {
         var currentTime = NSDate.timeIntervalSinceReferenceDate()
         var elapsedTime = currentTime - prevTime
         prevTime = currentTime
-        println(elapsedTime)
         currentDuration = NSTimeInterval(currentDuration! + elapsedTime)
     }
 
@@ -79,6 +83,21 @@ class StudyQuoteViewController: UIViewController {
     
     //MARK: - Quote Text Logic
 
+    private func finishRemembering() {
+        var alert = UIAlertController(title: "Finished Memorizing", message: "Congratulations! You finished remembering!", preferredStyle: UIAlertControllerStyle.Alert)
+        let test: UIAlertAction = UIAlertAction(title: "Test again", style: .Default)
+            { (action: UIAlertAction!) -> Void in
+                self.guessIndex--
+                self.reloadQuote()
+        }
+        let done: UIAlertAction = UIAlertAction(title: "Done", style: .Default)
+            { (action: UIAlertAction!) -> Void in
+                self.performSegueWithIdentifier("finishStudy", sender: nil)
+        }
+        alert.addAction(test)
+        alert.addAction(done)
+        presentViewController(alert, animated: true, completion: nil)
+    }
     private func binarySearch(numbers: [Int], target: Int, low: Int, high: Int) -> Bool {
         let midpoint = (low + high)/2
         if low > high {
@@ -94,7 +113,7 @@ class StudyQuoteViewController: UIViewController {
     }
 
     private func binarySearch(numbers: [Int], target: Int) -> Bool {
-        return binarySearch(numbers, target: target, low: numbers.startIndex, high: numbers.endIndex)
+        return numbers.count > 0 && binarySearch(numbers, target: target, low: numbers.startIndex, high: numbers.endIndex)
     }
 
 
@@ -128,15 +147,15 @@ class StudyQuoteViewController: UIViewController {
         var guessWord = ""
         if guessIndex < words.count {
             if words[guessIndex].hidden {
-                guessWord = "_____"
+                guessWord = "_____ "
             } else {
-                guessWord = words[guessIndex].text
+                guessWord = words[guessIndex].text + " "
             }
         }
-        var fullText: NSString = blackText + guessWord + " " +  greyText
+        var fullText: NSString = blackText + guessWord +  greyText
         var attrText = NSMutableAttributedString(string: fullText)
         let guessWordLength = countElements(guessWord)
-        let blackRange = fullText.rangeOfString(blackText)
+        let blackRange = NSMakeRange(0, countElements(blackText))
         
         // Adds attributes to text
         attrText.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: blackRange)
@@ -153,9 +172,10 @@ class StudyQuoteViewController: UIViewController {
     private func resetText() {
         guessIndex = 0
         for var i: Int = 0; i < words.count; ++i {
-            if !binarySearch(revealedWords, target: i) {
                 words[i].hidden = true
-            }
+        }
+        for i in revealedWords {
+            words[i].hidden = false
         }
     }
 
@@ -164,28 +184,23 @@ class StudyQuoteViewController: UIViewController {
         sender.text = ""
         if !letter.isEmpty && letter.lowercaseString[0] == words[guessIndex].text.lowercaseString[0] {
             wrong = false
+            words[guessIndex].hidden = false
             guessIndex++
-
-
             if guessIndex == words.count {
                 if revealedWords.count > 0 {
                     hideRandomWord()
                     resetText()
-                    reloadQuote()
                 } else {
-                    "Yayy"
+                    finishRemembering()
                 }
-            } else {
-                reloadQuote()
-                words[guessIndex].hidden = false
             }
         } else {
             wrong = true
-            reloadQuote()
-            println("boo try again")
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         }
+        reloadQuote()
     }
-
+    
 
     // MARK: - View Life Cycle
     override func viewWillAppear(animated: Bool) {
@@ -196,7 +211,17 @@ class StudyQuoteViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
+
+    override func viewWillDisappear(animated: Bool) {
+        var error: NSError? = NSError()
+        quote!.title = "SAVED " + quote!.title
+        quote!.currentTime = NSDate(timeIntervalSinceReferenceDate: currentDuration!)
+        if !managedObjectContext.save(&error) {
+            NSLog("Unresolved error: \(error), \(error!.userInfo)")
+            abort()
+        }
+    }
+
 
     /*
 

@@ -21,9 +21,19 @@ class QuotesTableViewController: UITableViewController {
         return quote
     }
     var quotes = [[Quote]]()
+    
+    
+    
+    override func viewWillDisappear(animated: Bool) {
+        var error: NSError? = NSError()
+        if !managedObjectContext.save(&error) {
+            NSLog("Unresolved error: \(error), \(error!.userInfo)")
+            abort()
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
+//        loadData()
         let fetchRequest = NSFetchRequest(entityName: "Quote")
         if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Quote] {
             quotes.insert(fetchResults, atIndex: 0)
@@ -33,7 +43,7 @@ class QuotesTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+         self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
     // MARK: - Table view data source
 
@@ -55,7 +65,7 @@ class QuotesTableViewController: UITableViewController {
     
     private func loadData() {
         for var i: Int = 0; i < 10; ++i {
-            createQuote("Quote \(i)", text: "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.")
+            createQuote("quote \(i)", text: "Four score and seven years ago.")
         }
     }
 
@@ -80,6 +90,21 @@ class QuotesTableViewController: UITableViewController {
             }
         }
     }
+    
+    @IBAction func saveQuote(segue: UIStoryboardSegue) {
+        var source = segue.sourceViewController as? UIViewController
+        if let navCon = source as? UINavigationController {
+            source = navCon.visibleViewController
+        }
+        if let saveView = source as? QuoteSaveViewController {
+            quotes[0].append(saveView.quote!)
+        }
+
+    }
+    
+    @IBAction func cancelSave(segue: UIStoryboardSegue) {
+        println("cancel")
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -88,17 +113,18 @@ class QuotesTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
+            managedObjectContext.deleteObject(quotes[indexPath.section][indexPath.row])
+            quotes[indexPath.section].removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.
