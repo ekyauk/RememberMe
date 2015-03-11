@@ -10,7 +10,6 @@
 		7015F6831AAD6C53004C58DD /* QuoteSaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015F6821AAD6C53004C58DD /* QuoteSaveViewController.swift */; };
 		7018F78E1AA6BE6300364B85 /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7018F78D1AA6BE6300364B85 /* QuoteTableViewCell.swift */; };
 		705BABD01AA66C80003A20C5 /* QuotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705BABCF1AA66C80003A20C5 /* QuotesTableViewController.swift */; };
-		705BABD21AA66D1C003A20C5 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705BABD11AA66D1C003A20C5 /* Quote.swift */; };
 		7087CE521AA9975200190F73 /* QuoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7087CE511AA9975200190F73 /* QuoteDetailViewController.swift */; };
 		70C2E0F91AA66BDA00DD09B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C2E0F81AA66BDA00DD09B8 /* AppDelegate.swift */; };
 		70C2E0FC1AA66BDB00DD09B8 /* RememberMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70C2E0FA1AA66BDA00DD09B8 /* RememberMe.xcdatamodeld */; };
@@ -19,6 +18,11 @@
 		70C2E1061AA66BDB00DD09B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C2E1041AA66BDB00DD09B8 /* LaunchScreen.xib */; };
 		70C2E1121AA66BDB00DD09B8 /* RememberMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C2E1111AA66BDB00DD09B8 /* RememberMeTests.swift */; };
 		70D4CAAC1AA9294B001DAD20 /* StudyQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D4CAAB1AA9294B001DAD20 /* StudyQuoteViewController.swift */; };
+		70E15F721AB0FB3C003CC864 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E15F711AB0FB3C003CC864 /* Quote.swift */; };
+		70E15F761AB0FBEA003CC864 /* QuoteGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E15F751AB0FBEA003CC864 /* QuoteGroup.swift */; };
+		70E9DCA21AAEC4FA00A8A4BE /* kjvdat.txt in Resources */ = {isa = PBXBuildFile; fileRef = 70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */; };
+		70E9DCB81AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */; };
+		70E9DCBA1AAF945300A8A4BE /* QuoteGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +39,6 @@
 		7015F6821AAD6C53004C58DD /* QuoteSaveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteSaveViewController.swift; sourceTree = "<group>"; };
 		7018F78D1AA6BE6300364B85 /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
 		705BABCF1AA66C80003A20C5 /* QuotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotesTableViewController.swift; sourceTree = "<group>"; };
-		705BABD11AA66D1C003A20C5 /* Quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		7087CE511AA9975200190F73 /* QuoteDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteDetailViewController.swift; sourceTree = "<group>"; };
 		70C2E0F31AA66BDA00DD09B8 /* RememberMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememberMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70C2E0F71AA66BDA00DD09B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,6 +51,11 @@
 		70C2E1101AA66BDB00DD09B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70C2E1111AA66BDB00DD09B8 /* RememberMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberMeTests.swift; sourceTree = "<group>"; };
 		70D4CAAB1AA9294B001DAD20 /* StudyQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQuoteViewController.swift; sourceTree = "<group>"; };
+		70E15F711AB0FB3C003CC864 /* Quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		70E15F751AB0FBEA003CC864 /* QuoteGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroup.swift; sourceTree = "<group>"; };
+		70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kjvdat.txt; sourceTree = "<group>"; };
+		70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupsTableViewController.swift; sourceTree = "<group>"; };
+		70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,15 +99,18 @@
 			children = (
 				7087CE511AA9975200190F73 /* QuoteDetailViewController.swift */,
 				7018F78D1AA6BE6300364B85 /* QuoteTableViewCell.swift */,
+				70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */,
 				70C2E0F81AA66BDA00DD09B8 /* AppDelegate.swift */,
 				705BABCF1AA66C80003A20C5 /* QuotesTableViewController.swift */,
 				70C2E0FF1AA66BDB00DD09B8 /* Main.storyboard */,
+				70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */,
 				7015F6821AAD6C53004C58DD /* QuoteSaveViewController.swift */,
 				70D4CAAB1AA9294B001DAD20 /* StudyQuoteViewController.swift */,
 				70C2E1021AA66BDB00DD09B8 /* Images.xcassets */,
 				70C2E1041AA66BDB00DD09B8 /* LaunchScreen.xib */,
 				70C2E0FA1AA66BDA00DD09B8 /* RememberMe.xcdatamodeld */,
-				705BABD11AA66D1C003A20C5 /* Quote.swift */,
+				70E15F751AB0FBEA003CC864 /* QuoteGroup.swift */,
+				70E15F711AB0FB3C003CC864 /* Quote.swift */,
 				70C2E0F61AA66BDA00DD09B8 /* Supporting Files */,
 			);
 			path = RememberMe;
@@ -108,6 +119,7 @@
 		70C2E0F61AA66BDA00DD09B8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */,
 				70C2E0F71AA66BDA00DD09B8 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -210,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70E9DCA21AAEC4FA00A8A4BE /* kjvdat.txt in Resources */,
 				70C2E1011AA66BDB00DD09B8 /* Main.storyboard in Resources */,
 				70C2E1061AA66BDB00DD09B8 /* LaunchScreen.xib in Resources */,
 				70C2E1031AA66BDB00DD09B8 /* Images.xcassets in Resources */,
@@ -233,11 +246,14 @@
 				7087CE521AA9975200190F73 /* QuoteDetailViewController.swift in Sources */,
 				70C2E0FC1AA66BDB00DD09B8 /* RememberMe.xcdatamodeld in Sources */,
 				7018F78E1AA6BE6300364B85 /* QuoteTableViewCell.swift in Sources */,
+				70E9DCB81AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift in Sources */,
 				705BABD01AA66C80003A20C5 /* QuotesTableViewController.swift in Sources */,
+				70E9DCBA1AAF945300A8A4BE /* QuoteGroupTableViewCell.swift in Sources */,
 				7015F6831AAD6C53004C58DD /* QuoteSaveViewController.swift in Sources */,
-				705BABD21AA66D1C003A20C5 /* Quote.swift in Sources */,
 				70C2E0F91AA66BDA00DD09B8 /* AppDelegate.swift in Sources */,
+				70E15F721AB0FB3C003CC864 /* Quote.swift in Sources */,
 				70D4CAAC1AA9294B001DAD20 /* StudyQuoteViewController.swift in Sources */,
+				70E15F761AB0FBEA003CC864 /* QuoteGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

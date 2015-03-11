@@ -10,16 +10,11 @@ import UIKit
 import CoreData
 class QuotesTableViewController: UITableViewController {
 
+    
+
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
-    
-    private func createQuote(title: String, text: String) -> Quote {
-        let quote = NSEntityDescription.insertNewObjectForEntityForName("Quote", inManagedObjectContext: managedObjectContext) as Quote
-        quote.title = title
-        quote.text = text
-        quote.currentTime = NSDate(timeIntervalSinceReferenceDate: 0)
-        return quote
-    }
+
     var quotes = [[Quote]]()
     
     
@@ -31,19 +26,19 @@ class QuotesTableViewController: UITableViewController {
             abort()
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        loadData()
-        let fetchRequest = NSFetchRequest(entityName: "Quote")
-        if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Quote] {
-            quotes.insert(fetchResults, atIndex: 0)
-        }
+ 
+//        let fetchRequest = NSFetchRequest(entityName: "Quote")
+//        if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Quote] {
+//            quotes.insert(fetchResults, atIndex: 0)
+//        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
     // MARK: - Table view data source
 
@@ -62,14 +57,7 @@ class QuotesTableViewController: UITableViewController {
     private struct Storyboard {
         static let CellReuseIdentifier = "quote"
     }
-    
-    private func loadData() {
-        for var i: Int = 0; i < 10; ++i {
-            createQuote("quote \(i)", text: "Four score and seven years ago.")
-        }
-    }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as QuoteTableViewCell
         cell.quote = quotes[indexPath.section][indexPath.row]
         return cell

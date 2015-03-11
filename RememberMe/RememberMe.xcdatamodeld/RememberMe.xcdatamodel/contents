@@ -6,8 +6,14 @@
         <attribute name="inProgress" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="quoteGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QuoteGroup" inverseName="quotes" inverseEntity="QuoteGroup" syncable="YES"/>
+    </entity>
+    <entity name="QuoteGroup" representedClassName="RememberMe.QuoteGroup" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="quoteGroups" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Quote" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Quote" positionX="-9" positionY="81" width="128" height="133"/>
+        <element name="QuoteGroup" positionX="-45" positionY="45" width="128" height="73"/>
     </elements>
 </model>

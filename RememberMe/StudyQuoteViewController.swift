@@ -69,10 +69,7 @@ class StudyQuoteViewController: UIViewController {
         return "\(strHours):\(strMinutes):\(strSeconds)"
     }
     func updateTime() {
-        var currentTime = NSDate.timeIntervalSinceReferenceDate()
-        var elapsedTime = currentTime - prevTime
-        prevTime = currentTime
-        currentDuration = NSTimeInterval(currentDuration! + elapsedTime)
+        currentDuration = NSTimeInterval(currentDuration! + 1.0)
     }
 
     private func startTimer() {
@@ -214,7 +211,6 @@ class StudyQuoteViewController: UIViewController {
 
     override func viewWillDisappear(animated: Bool) {
         var error: NSError? = NSError()
-        quote!.title = "SAVED " + quote!.title
         quote!.currentTime = NSDate(timeIntervalSinceReferenceDate: currentDuration!)
         if !managedObjectContext.save(&error) {
             NSLog("Unresolved error: \(error), \(error!.userInfo)")
