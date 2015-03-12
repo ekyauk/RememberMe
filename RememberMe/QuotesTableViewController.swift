@@ -8,9 +8,10 @@
 
 import UIKit
 import CoreData
-class QuotesTableViewController: UITableViewController {
+class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
 
     
+    @IBOutlet weak var searchBar: UISearchBar!
 
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
@@ -18,7 +19,30 @@ class QuotesTableViewController: UITableViewController {
     var quotes = [[Quote]]()
     
     
+    var filteredQuotes = [Quote]()
     
+    
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        self.filterContentForSearchText(searchString)
+        return true
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+        return true
+    }
+    
+    func filterContentForSearchText(searchText: String) {
+        filteredQuotes.removeAll(keepCapacity: false)
+        for quoteArr in quotes {
+            filteredQuotes += quoteArr.filter {
+                $0.title.lowercaseString.rangeOfString(searchText.lowercaseString) != nil ||
+                $0.text.lowercaseString.rangeOfString(searchText.lowercaseString) != nil
+            }
+        }
+    }
+    
+        
     override func viewWillDisappear(animated: Bool) {
         var error: NSError? = NSError()
         if !managedObjectContext.save(&error) {
@@ -45,24 +69,39 @@ class QuotesTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return quotes.count
+   
+        return tableView == self.searchDisplayController!.searchResultsTableView && filteredQuotes.isEmpty ? 0 : quotes.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return quotes[section].count
+        return tableView == self.searchDisplayController!.searchResultsTableView ? filteredQuotes.count : quotes[section].count
     }
 
     private struct Storyboard {
         static let CellReuseIdentifier = "quote"
     }
-        override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as QuoteTableViewCell
-        cell.quote = quotes[indexPath.section][indexPath.row]
-        return cell
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell: QuoteTableViewCell?
+        if tableView == self.searchDisplayController!.searchResultsTableView  {
+            tableView.registerClass(QuoteTableViewCell.classForCoder(), forCellReuseIdentifier: Storyboard.CellReuseIdentifier)
+            cell = QuoteTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.CellReuseIdentifier)
+        } else {
+            cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as? QuoteTableViewCell
+        }
+        cell!.quote = tableView == self.searchDisplayController!.searchResultsTableView ? filteredQuotes[indexPath.row] : quotes[indexPath.section][indexPath.row]
+        return cell!
     }
 
+    // Allows selecting a cell on the search view to execute a segue
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            performSegueWithIdentifier("quoteDetail", sender: self.tableView(tableView, cellForRowAtIndexPath: indexPath))
+        }
+    }
+
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "quoteDetail" {
             var destination = segue.destinationViewController as? UIViewController

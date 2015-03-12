@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-class QuoteGroupsTableViewController: UITableViewController {
+class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
 
     let bibleTitles = [
         "Gen":"Genesis",
@@ -108,6 +108,7 @@ class QuoteGroupsTableViewController: UITableViewController {
         "Rev":"Revelation",
     ];
 
+    @IBOutlet weak var searchBar: UISearchBar!
     let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
 
     lazy var quoteGroups: [[QuoteGroup]] = {
@@ -117,12 +118,32 @@ class QuoteGroupsTableViewController: UITableViewController {
         let quotesRequest = NSFetchRequest(entityName: "Quote")
         let quotes = self.managedObjectContext.executeFetchRequest(quotesRequest, error: nil) ?? [Quote]()
         allGroup.quotes = NSSet(array: quotes)
-        allSection.append(allGroup)
-        groups.append(allSection)
+        allSection.insert(allGroup, atIndex: 0)
+        groups.insert(allSection, atIndex: 0)
         return groups
         }()
 
+    var filteredQuoteGroups = [QuoteGroup]()
+    
+    
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        self.filterContentForSearchText(searchString)
+        return true
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+        return true
+    }
 
+    func filterContentForSearchText(searchText: String) {
+        filteredQuoteGroups.removeAll(keepCapacity: false)
+        for quoteGroupArr in quoteGroups {
+            filteredQuoteGroups += quoteGroupArr.filter {
+                $0.name.lowercaseString.rangeOfString(searchText.lowercaseString) != nil
+            }
+        }
+    }
     
     private func createQuote(title: String, text: String) -> Quote {
         let quote = NSEntityDescription.insertNewObjectForEntityForName("Quote", inManagedObjectContext: managedObjectContext) as Quote
@@ -192,14 +213,20 @@ class QuoteGroupsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearAllData()
-        loadData()
+        var fetchReq = NSFetchRequest(entityName: "QuoteGroup")
+        var error: NSError? = NSError()
+        var quoteGroup: QuoteGroup?
+        var fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: nil) as? [QuoteGroup]
+        if fetchResults != nil {
+            if fetchResults!.isEmpty {
+                clearAllData()
+                loadData()
+                fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: nil) as [QuoteGroup]?
+            }
+            quoteGroups[0] += fetchResults!
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        let fetchRequest = NSFetchRequest(entityName: "QuoteGroup")
-        if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [QuoteGroup] {
-            quoteGroups.append(fetchResults)
-        }
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
          self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -218,7 +245,7 @@ class QuoteGroupsTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return quoteGroups.count
+        return tableView == self.searchDisplayController!.searchResultsTableView && filteredQuoteGroups.isEmpty ? 0 : quoteGroups.count
     }
     private struct Storyboard {
         static let CellReuseIdentifier = "quoteGroup"
@@ -226,15 +253,24 @@ class QuoteGroupsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return quoteGroups[section].count
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            return filteredQuoteGroups.count
+        } else {
+            return quoteGroups[section].count
+        }
     }
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as QuoteGroupTableViewCell
-
-        cell.group = quoteGroups[indexPath.section][indexPath.row]
-        return cell
+        var cell: QuoteGroupTableViewCell?
+        if tableView == self.searchDisplayController!.searchResultsTableView  {
+            tableView.registerClass(QuoteGroupTableViewCell.classForCoder(), forCellReuseIdentifier: Storyboard.CellReuseIdentifier)
+            cell = QuoteGroupTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.CellReuseIdentifier)
+        } else {
+            cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as? QuoteGroupTableViewCell
+        }
+        cell!.group = tableView == self.searchDisplayController!.searchResultsTableView ? filteredQuoteGroups[indexPath.row] : quoteGroups[indexPath.section][indexPath.row]
+        return cell!
     }
 
 
@@ -272,7 +308,11 @@ class QuoteGroupsTableViewController: UITableViewController {
         return true
     }
     */
-
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            performSegueWithIdentifier("quoteGroup", sender: self.tableView(tableView, cellForRowAtIndexPath: indexPath))
+        }
+    }
 
     // MARK: - Navigation
     func quoteIsBefore(q1: Quote, q2: Quote) -> Bool {

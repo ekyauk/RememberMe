@@ -36,7 +36,6 @@ class StudyQuoteViewController: UIViewController {
             }
         }
     }
-    private var prevTime = NSDate.timeIntervalSinceReferenceDate()
     private var words = [QuoteWord]()
     private lazy var revealedWords: [Int] = {
         return Array(0...self.words.count-1)
@@ -68,14 +67,13 @@ class StudyQuoteViewController: UIViewController {
         let strSeconds = seconds > 9 ? String(seconds) : "0" + String(seconds)
         return "\(strHours):\(strMinutes):\(strSeconds)"
     }
-    func updateTime() {
+    func incrementTime() {
         currentDuration = NSTimeInterval(currentDuration! + 1.0)
     }
 
     private func startTimer() {
-        let selector : Selector = "updateTime"
+        let selector : Selector = "incrementTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: selector, userInfo: nil, repeats: true)
-        prevTime = NSDate.timeIntervalSinceReferenceDate()
     }
     
     //MARK: - Quote Text Logic
@@ -91,6 +89,7 @@ class StudyQuoteViewController: UIViewController {
             { (action: UIAlertAction!) -> Void in
                 self.performSegueWithIdentifier("finishStudy", sender: nil)
         }
+        quote?.bestTime = NSDate(timeIntervalSinceReferenceDate: currentDuration!)
         alert.addAction(test)
         alert.addAction(done)
         presentViewController(alert, animated: true, completion: nil)
@@ -156,6 +155,7 @@ class StudyQuoteViewController: UIViewController {
         
         // Adds attributes to text
         attrText.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: blackRange)
+        attrText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: UIFont.labelFontSize())!, range: NSMakeRange(0, attrText.length))
         var guessWordColor = UIColor.grayColor()
         if wrong {
             guessWordColor = UIColor.redColor()
