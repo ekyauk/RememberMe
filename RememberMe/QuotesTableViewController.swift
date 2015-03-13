@@ -17,8 +17,7 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
 
     var quotes = [[Quote]]()
-    
-    
+    var group: QuoteGroup?
     var filteredQuotes = [Quote]()
     
     
@@ -50,15 +49,13 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
             abort()
         }
     }
-    
+
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
- 
-//        let fetchRequest = NSFetchRequest(entityName: "Quote")
-//        if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Quote] {
-//            quotes.insert(fetchResults, atIndex: 0)
-//        }
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -125,6 +122,9 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
         }
         if let saveView = source as? QuoteSaveViewController {
             quotes[0].append(saveView.quote!)
+            quotes[0].sort {
+                $0.title < $1.title
+            }
         }
 
     }

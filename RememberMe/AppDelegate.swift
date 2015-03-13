@@ -14,9 +14,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let studyVariables = NSUserDefaults.standardUserDefaults()
+
+    private func initializeVariables() {
+        if studyVariables.valueForKey("shakeEnabled") == nil {
+            studyVariables.setBool(true, forKey: "shakeEnabled")
+        }
+        if studyVariables.valueForKey("minHidden") == nil {
+            studyVariables.setInteger(1, forKey: "minHidden")
+        }
+        if studyVariables.valueForKey("maxHidden") == nil {
+            studyVariables.setInteger(1, forKey: "maxHidden")
+        }
+        if studyVariables.valueForKey("numAttempts") == nil {
+            studyVariables.setInteger(5, forKey: "numAttempts")
+        }
+        studyVariables.synchronize()
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        initializeVariables()
         return true
     }
 

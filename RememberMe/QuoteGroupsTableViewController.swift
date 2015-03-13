@@ -186,9 +186,6 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
     }
 
     private func loadData() {
-        //        for var i: Int = 0; i < 10; ++i {
-        //            createQuote("quote \(i)", text: "Four score and seven years ago.")
-        //        }
         let path = NSBundle.mainBundle().pathForResource("kjvdat", ofType: "txt")
         var error: NSError? = NSError()
         if let fileStr = String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: &error) {
@@ -197,8 +194,8 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
                 var bibleQuote = split(line) { $0 == "|" }
                 let fileName = bibleQuote[0].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
                 let book = bibleTitles[fileName] ?? fileName
-                let chapterNum = bibleQuote[1]
-                let verseNum = bibleQuote[2]
+                let chapterNum = countElements(bibleQuote[1]) > 1 ? bibleQuote[1] : "0\(bibleQuote[1])"
+                let verseNum = countElements(bibleQuote[2]) > 1 ? bibleQuote[2] : "0\(bibleQuote[2])"
                 let text = bibleQuote[3].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
                 let quote: Quote = createQuote("\(book) [\(chapterNum):\(verseNum)]", text: text)
                 let group = getGroup(book)
@@ -219,11 +216,13 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
         var fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: nil) as? [QuoteGroup]
         if fetchResults != nil {
             if fetchResults!.isEmpty {
-                clearAllData()
                 loadData()
                 fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: nil) as [QuoteGroup]?
             }
-            quoteGroups[0] += fetchResults!
+            fetchResults!.sort {
+                $0.name < $1.name
+            }
+            quoteGroups.append(fetchResults!)
         }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -334,6 +333,7 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
                         if identifier == "quoteGroup" {
                             quoteTableViewController.quotes = [[Quote]]()
                             quoteTableViewController.quotes.insert(quotes, atIndex: 0)
+                            quoteTableViewController.group = quoteGroup.group
                         }
                     }
                 }

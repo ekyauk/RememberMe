@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7015F6831AAD6C53004C58DD /* QuoteSaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015F6821AAD6C53004C58DD /* QuoteSaveViewController.swift */; };
 		7018F78E1AA6BE6300364B85 /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7018F78D1AA6BE6300364B85 /* QuoteTableViewCell.swift */; };
+		7045762B1AB23F8200870E78 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7045762A1AB23F8200870E78 /* SettingTableViewController.swift */; };
 		705BABD01AA66C80003A20C5 /* QuotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705BABCF1AA66C80003A20C5 /* QuotesTableViewController.swift */; };
 		7087CE521AA9975200190F73 /* QuoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7087CE511AA9975200190F73 /* QuoteDetailViewController.swift */; };
 		70C2E0F91AA66BDA00DD09B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C2E0F81AA66BDA00DD09B8 /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		7015F6821AAD6C53004C58DD /* QuoteSaveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteSaveViewController.swift; sourceTree = "<group>"; };
 		7018F78D1AA6BE6300364B85 /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
+		7045762A1AB23F8200870E78 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		705BABCF1AA66C80003A20C5 /* QuotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotesTableViewController.swift; sourceTree = "<group>"; };
 		7087CE511AA9975200190F73 /* QuoteDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteDetailViewController.swift; sourceTree = "<group>"; };
 		70C2E0F31AA66BDA00DD09B8 /* RememberMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememberMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 				70C2E0F81AA66BDA00DD09B8 /* AppDelegate.swift */,
 				705BABCF1AA66C80003A20C5 /* QuotesTableViewController.swift */,
 				70C2E0FF1AA66BDB00DD09B8 /* Main.storyboard */,
+				7045762A1AB23F8200870E78 /* SettingTableViewController.swift */,
 				70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */,
 				7015F6821AAD6C53004C58DD /* QuoteSaveViewController.swift */,
 				70D4CAAB1AA9294B001DAD20 /* StudyQuoteViewController.swift */,
@@ -243,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7045762B1AB23F8200870E78 /* SettingTableViewController.swift in Sources */,
 				7087CE521AA9975200190F73 /* QuoteDetailViewController.swift in Sources */,
 				70C2E0FC1AA66BDB00DD09B8 /* RememberMe.xcdatamodeld in Sources */,
 				7018F78E1AA6BE6300364B85 /* QuoteTableViewCell.swift in Sources */,
@@ -379,6 +383,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RememberMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -389,6 +394,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RememberMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
