@@ -64,15 +64,10 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-   
         return tableView == self.searchDisplayController!.searchResultsTableView && filteredQuotes.isEmpty ? 0 : quotes.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         return tableView == self.searchDisplayController!.searchResultsTableView ? filteredQuotes.count : quotes[section].count
     }
 
@@ -121,6 +116,7 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
             source = navCon.visibleViewController
         }
         if let saveView = source as? QuoteSaveViewController {
+            saveView.quote!.addGroup(group!)
             quotes[0].append(saveView.quote!)
             quotes[0].sort {
                 $0.title < $1.title

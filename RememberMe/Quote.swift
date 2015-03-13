@@ -18,4 +18,10 @@ class Quote: NSManagedObject {
     @NSManaged var title: String
     @NSManaged var quoteGroups: NSSet
 
+    func addGroup(group: QuoteGroup) {
+        let newQuotesSet = group.quotes.setByAddingObject(self)
+        let newGroupsSet = self.quoteGroups.setByAddingObject(group)
+        group.quotes = newQuotesSet
+        self.quoteGroups = newGroupsSet
+    }
 }

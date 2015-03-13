@@ -248,10 +248,7 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
                 let text = bibleQuote[3].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
                 let quote: Quote = createQuote("\(book) [\(chapterNum):\(verseNum)]", text: text)
                 let group = getGroup(book)
-                let newQuotesSet = group.quotes.setByAddingObject(quote)
-                let newGroupsSet = quote.quoteGroups.setByAddingObject(group)
-                group.quotes = newQuotesSet
-                quote.quoteGroups = newGroupsSet
+                quote.addGroup(group)
             }
         }
     }

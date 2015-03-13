@@ -67,10 +67,9 @@ class StudyQuoteViewController: UIViewController {
         let selector : Selector = "incrementTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: selector, userInfo: nil, repeats: true)
     }
-    
     //MARK: - Quote Text Logic
 
-    private func finishRemembering() {
+    private func showFinishedAlert() {
         var alert = UIAlertController(title: "Finished Memorizing", message: "Congratulations! You finished remembering!", preferredStyle: UIAlertControllerStyle.Alert)
         let test: UIAlertAction = UIAlertAction(title: "Test again", style: .Default)
             { (action: UIAlertAction!) -> Void in
@@ -81,13 +80,18 @@ class StudyQuoteViewController: UIViewController {
             { (action: UIAlertAction!) -> Void in
                 self.performSegueWithIdentifier("finishStudy", sender: nil)
         }
-        if quote?.bestTime.timeIntervalSinceReferenceDate == 0.0 || quote?.bestTime.timeIntervalSinceReferenceDate > currentDuration! {
-            quote?.bestTime = NSDate(timeIntervalSinceReferenceDate: currentDuration!)
-        }
-        currentDuration = NSTimeInterval(0)
         alert.addAction(test)
         alert.addAction(done)
         presentViewController(alert, animated: true, completion: nil)
+    }
+
+    private func finishRemembering() {
+        if quote?.bestTime.timeIntervalSinceReferenceDate == 0.0 || quote?.bestTime.timeIntervalSinceReferenceDate > currentDuration! {
+            quote?.bestTime = NSDate(timeIntervalSinceReferenceDate: currentDuration!)
+        }
+        timer.invalidate()
+        currentDuration = NSTimeInterval(0)
+        showFinishedAlert()
     }
     private func binarySearch(numbers: [Int], target: Int, low: Int, high: Int) -> Bool {
         let midpoint = (low + high)/2

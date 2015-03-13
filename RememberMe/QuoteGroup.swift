@@ -14,4 +14,11 @@ class QuoteGroup: NSManagedObject {
     @NSManaged var name: String
     @NSManaged var quotes: NSSet
 
+    func addQuote(quote: Quote) {
+        let newGroupsSet = quote.quoteGroups.setByAddingObject(self)
+        let newQuotesSet = self.quotes.setByAddingObject(quote)
+        self.quotes = newQuotesSet
+        quote.quoteGroups = newGroupsSet
+    }
+
 }
