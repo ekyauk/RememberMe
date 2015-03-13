@@ -123,6 +123,7 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
         return groups
         }()
 
+    //MARK: - Search logic
     var filteredQuoteGroups = [QuoteGroup]()
     
     
@@ -145,6 +146,50 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
         }
     }
     
+    
+    //MARK: - Data Logic
+    
+    
+    @IBAction func addGroup(sender: UIBarButtonItem) {
+        var alert = UIAlertController(title: "New Group", message: "Create a new group", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "Group Name"
+        }
+        let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .Default )
+            { (action: UIAlertAction!) -> Void in
+             return
+            }
+        let save: UIAlertAction = UIAlertAction(title: "Save", style: .Default)
+            { (action: UIAlertAction!) -> Void in
+                if let tf = alert.textFields?.first as? UITextField {
+                    self.createGroup(tf.text)
+                    self.refresh()
+            }
+        }
+        alert.addAction(cancel)
+        alert.addAction(save)
+        presentViewController(alert, animated: true, completion: nil)
+
+    }
+
+    
+    private func refresh() {
+        var fetchReq = NSFetchRequest(entityName: "QuoteGroup")
+        var error: NSError? = NSError()
+        var quoteGroup: QuoteGroup?
+        var fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: nil) as? [QuoteGroup]
+        if fetchResults != nil {
+            if fetchResults!.isEmpty {
+                loadData()
+                fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: nil) as [QuoteGroup]?
+            }
+            fetchResults!.sort {
+                $0.name < $1.name
+            }
+            quoteGroups.insert(fetchResults!, atIndex: 1)
+        }
+        tableView.reloadData()
+    }
     private func createQuote(title: String, text: String) -> Quote {
         let quote = NSEntityDescription.insertNewObjectForEntityForName("Quote", inManagedObjectContext: managedObjectContext) as Quote
         quote.title = title
@@ -169,6 +214,11 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
         
     }
     
+    private func createGroup(name: String) -> QuoteGroup? {
+        let quoteGroup = NSEntityDescription.insertNewObjectForEntityForName("QuoteGroup", inManagedObjectContext: managedObjectContext) as? QuoteGroup
+        quoteGroup?.name = name
+        return quoteGroup
+    }
     private func getGroup(name: String) -> QuoteGroup {
         var fetchReq = NSFetchRequest(entityName: "QuoteGroup")
         var error: NSError? = NSError()
@@ -176,8 +226,7 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
         var quoteGroup: QuoteGroup?
         if let fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: &error) {
             if fetchResults.isEmpty {
-                quoteGroup = NSEntityDescription.insertNewObjectForEntityForName("QuoteGroup", inManagedObjectContext: managedObjectContext) as? QuoteGroup
-                quoteGroup?.name = name
+                quoteGroup = createGroup(name)
             } else {
                 quoteGroup = fetchResults[0] as? QuoteGroup
             }
@@ -210,25 +259,12 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        var fetchReq = NSFetchRequest(entityName: "QuoteGroup")
-        var error: NSError? = NSError()
-        var quoteGroup: QuoteGroup?
-        var fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: nil) as? [QuoteGroup]
-        if fetchResults != nil {
-            if fetchResults!.isEmpty {
-                loadData()
-                fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: nil) as [QuoteGroup]?
-            }
-            fetchResults!.sort {
-                $0.name < $1.name
-            }
-            quoteGroups.append(fetchResults!)
-        }
+        refresh()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
 
     override func viewWillDisappear(animated: Bool) {

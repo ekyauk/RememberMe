@@ -358,7 +358,13 @@
                             <outlet property="delegate" destination="eVO-po-4Ds" id="v5c-79-hu0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="JFG-dL-2Yz"/>
+                    <navigationItem key="navigationItem" id="JFG-dL-2Yz">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="MFN-2V-MNb">
+                            <connections>
+                                <action selector="addGroup:" destination="eVO-po-4Ds" id="bwm-sr-1Bk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="pqd-5C-yEe" id="D6a-EQ-IVb"/>
                         <outlet property="searchDisplayController" destination="Dc3-kO-Klo" id="rGE-i0-N17"/>
