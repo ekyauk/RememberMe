@@ -26,6 +26,7 @@ class StudyQuoteViewController: UIViewController {
     // MARK: - Class Variables
     @IBOutlet weak var quoteText: UITextView!
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var inputField: UITextField!
     @IBOutlet weak var timeLabel: UILabel!
     private var numWrong = 0
@@ -35,7 +36,7 @@ class StudyQuoteViewController: UIViewController {
         didSet {
             if let duration = currentDuration {
                 if let label = timeLabel {
-                    label.text = timeToString(duration)
+                    label.text = duration.toString()
                 }
             }
         }
@@ -58,20 +59,6 @@ class StudyQuoteViewController: UIViewController {
 
     //MARK: - Time Functions
     
-    private func timeToString(time: NSTimeInterval) -> String {
-        var elapsedTime = time
-        let secondsPerMinute = 60.0
-        let minutesPerHour = 60.0
-        let hours = UInt8(elapsedTime/(secondsPerMinute * minutesPerHour))
-        elapsedTime -= NSTimeInterval(hours) * secondsPerMinute * minutesPerHour
-        let minutes = UInt8(elapsedTime/secondsPerMinute)
-        elapsedTime -= NSTimeInterval(minutes) * secondsPerMinute
-        let seconds = UInt8(elapsedTime)
-        let strHours = hours > 9 ? String(hours) : "0" + String(hours)
-        let strMinutes = minutes > 9 ? String(minutes) : "0" + String(minutes)
-        let strSeconds = seconds > 9 ? String(seconds) : "0" + String(seconds)
-        return "\(strHours):\(strMinutes):\(strSeconds)"
-    }
     func incrementTime() {
         currentDuration = NSTimeInterval(currentDuration! + 1.0)
     }
@@ -209,7 +196,6 @@ class StudyQuoteViewController: UIViewController {
                     let range = max - min
                     let numHidden = arc4random_uniform(UInt32(range)) + min
                     for var i: UInt32 = 0; i < numHidden; ++i {
-                        println(numHidden)
                         hideRandomWord()
                     }
                     resetText()
@@ -252,6 +238,8 @@ class StudyQuoteViewController: UIViewController {
 
     // MARK: - View Life Cycle
     override func viewWillAppear(animated: Bool) {
+        titleLabel.text = quote?.title
+        timeLabel.text = quote!.currentTime.timeIntervalSinceReferenceDate.toString()
         reloadQuote(false)
         startTimer()
     }
@@ -288,7 +276,23 @@ class StudyQuoteViewController: UIViewController {
 
 }
 /* Taken from http://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language */
-
+extension NSTimeInterval {
+    func toString() -> String {
+        let time = self
+        var elapsedTime = time
+        let secondsPerMinute = 60.0
+        let minutesPerHour = 60.0
+        let hours = UInt8(elapsedTime/(secondsPerMinute * minutesPerHour))
+        elapsedTime -= NSTimeInterval(hours) * secondsPerMinute * minutesPerHour
+        let minutes = UInt8(elapsedTime/secondsPerMinute)
+        elapsedTime -= NSTimeInterval(minutes) * secondsPerMinute
+        let seconds = UInt8(elapsedTime)
+        let strHours = hours > 9 ? String(hours) : "0" + String(hours)
+        let strMinutes = minutes > 9 ? String(minutes) : "0" + String(minutes)
+        let strSeconds = seconds > 9 ? String(seconds) : "0" + String(seconds)
+        return "\(strHours):\(strMinutes):\(strSeconds)"
+    }
+}
 extension String {
     subscript (i: Int) -> Character {
         return self[advance(self.startIndex, i)]

@@ -20,11 +20,15 @@ class QuoteDetailViewController: UIViewController {
     
     @IBOutlet weak var quoteTitle: UILabel!
     @IBOutlet weak var quoteText: UITextView!
+    @IBOutlet weak var bestTime: UILabel!
+    @IBOutlet weak var currentTime: UILabel!
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         quoteTitle.text = quote?.title
         quoteText.text = quote?.text
+        bestTime.text = quote!.bestTime.timeIntervalSinceReferenceDate.toString()
+        currentTime.text = quote!.currentTime.timeIntervalSinceReferenceDate.toString()
 
     }
     
