@@ -81,7 +81,10 @@ class StudyQuoteViewController: UIViewController {
             { (action: UIAlertAction!) -> Void in
                 self.performSegueWithIdentifier("finishStudy", sender: nil)
         }
-        quote?.bestTime = NSDate(timeIntervalSinceReferenceDate: currentDuration!)
+        if quote?.bestTime.timeIntervalSinceReferenceDate == 0.0 || quote?.bestTime.timeIntervalSinceReferenceDate > currentDuration! {
+            quote?.bestTime = NSDate(timeIntervalSinceReferenceDate: currentDuration!)
+        }
+        currentDuration = NSTimeInterval(0)
         alert.addAction(test)
         alert.addAction(done)
         presentViewController(alert, animated: true, completion: nil)
