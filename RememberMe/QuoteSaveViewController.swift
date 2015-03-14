@@ -19,7 +19,23 @@ class QuoteSaveViewController: UIViewController {
     var quote: Quote?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let center = NSNotificationCenter.defaultCenter()
+        let queue = NSOperationQueue.mainQueue()
+        let appDelegate = UIApplication.sharedApplication().delegate
 
+        center.addObserverForName(TXTURL.Notification, object: appDelegate, queue: queue) { notification in
+            if let url = notification?.userInfo?[TXTURL.Key] as? NSURL {
+                var error: NSError? = NSError()
+                if let fileStr = String(contentsOfURL: url, encoding: NSUTF8StringEncoding, error: &error) {
+                    var quoteArr = split(fileStr) { $0 == "|"}
+                    if quoteArr.count >= 2 {
+                        self.titleField.text = quoteArr[0]
+                        self.quoteField.text = quoteArr[1]
+                    }
+                }
+            }
+        }
         // Do any additional setup after loading the view.
     }
 

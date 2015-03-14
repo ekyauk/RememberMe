@@ -110,6 +110,7 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
 
     @IBOutlet weak var searchBar: UISearchBar!
     let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
+    let userDefaults = NSUserDefaults.standardUserDefaults()
 
     lazy var quoteGroups: [[QuoteGroup]] = {
         var groups = [[QuoteGroup]]()
@@ -257,6 +258,23 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         refresh()
+        let center = NSNotificationCenter.defaultCenter()
+        let queue = NSOperationQueue.mainQueue()
+        let appDelegate = UIApplication.sharedApplication().delegate
+        
+        center.addObserverForName(TXTURL.Notification, object: appDelegate, queue: queue) { notification in
+            if let url = notification?.userInfo?[TXTURL.Key] as? NSURL {
+                var error: NSError? = NSError()
+                if let fileStr = String(contentsOfURL: url, encoding: NSUTF8StringEncoding, error: &error) {
+                    var quoteArr = split(fileStr) { $0 == "|"}
+                    if quoteArr.count >= 2 {
+                        let title = quoteArr[0]
+                        let text = quoteArr[1]
+                        self.performSegueWithIdentifier("textFileSave", sender: self.createQuote(title, text: text))
+                    }
+                }
+            }
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -347,6 +365,30 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
     }
 
     // MARK: - Navigation
+    
+    @IBAction func saveQuote(segue: UIStoryboardSegue) {
+        var source = segue.sourceViewController as? UIViewController
+        if let navCon = source as? UINavigationController {
+            source = navCon.visibleViewController
+        }
+        if let saveView = source as? QuoteSaveViewController {
+            if let q = saveView.quote {
+                if q.quoteGroups.count == 0 {
+                    var recent = userDefaults.valueForKey("recent") as [String]
+                    recent.insert(q.strID(), atIndex: 0)
+                    userDefaults.setValue(recent, forKey: "recent")
+                    userDefaults.synchronize()
+                }
+            }
+        }
+        
+    }
+    
+    @IBAction func cancelSave(segue: UIStoryboardSegue) {
+        println("cancel")
+    }
+
+    
     func quoteIsBefore(q1: Quote, q2: Quote) -> Bool {
         return q1.title < q2.title
     }
@@ -358,16 +400,22 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
         if let navCon = destination as? UINavigationController {
             destination = navCon.visibleViewController
         }
-        if let quoteTableViewController = destination as? QuotesTableViewController {
-            if let quoteGroup = sender as? QuoteGroupTableViewCell {
-                if let identifier = segue.identifier {
-                    if var quotes = quoteGroup.group?.quotes.allObjects as? [Quote] {
-                        quotes.sort(quoteIsBefore)
-                        if identifier == "quoteGroup" {
+        if let identifier = segue.identifier {
+            if identifier == "quoteGroup" {
+                if let quoteTableViewController = destination as? QuotesTableViewController {
+                    if let quoteGroup = sender as? QuoteGroupTableViewCell {
+                        if var quotes = quoteGroup.group?.quotes.allObjects as? [Quote] {
+                            quotes.sort(quoteIsBefore)
                             quoteTableViewController.quotes = [[Quote]]()
                             quoteTableViewController.quotes.insert(quotes, atIndex: 0)
                             quoteTableViewController.group = quoteGroup.group
                         }
+                    }
+                }
+            } else if identifier == "textFileSave" {
+                if let quote = sender as? Quote {
+                    if let quoteSaveController = destination as? QuoteSaveViewController {
+                        quoteSaveController.quote = quote
                     }
                 }
             }

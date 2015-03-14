@@ -9,6 +9,11 @@
 import UIKit
 import CoreData
 
+struct TXTURL {
+    static let Notification = "TXTURL Radio Station"
+    static let Key = "TXTURL URL Key"
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -43,6 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         initializeVariables()
+        return true
+    }
+    
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        let center = NSNotificationCenter.defaultCenter()
+        let notification = NSNotification(name: TXTURL.Notification, object: self, userInfo: [TXTURL.Key:url])
+        center.postNotification(notification)
+        
         return true
     }
 
