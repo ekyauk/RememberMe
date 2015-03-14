@@ -364,23 +364,20 @@
                                     <action selector="valueChanged:" destination="rCH-Tk-dw9" eventType="editingChanged" id="aaS-GT-8pi"/>
                                 </connections>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XY-x1-5IP">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XY-x1-5IP">
                                 <rect key="frame" x="16" y="110.5" width="568" height="415.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="no"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="7j5-eA-yUX" appends="YES" id="nVd-Xj-Lgs"/>
-                                </connections>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQH-rD-AbD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQH-rD-AbD">
                                 <rect key="frame" x="527.5" y="74" width="56.5" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHr-v0-uoi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHr-v0-uoi">
                                 <rect key="frame" x="284" y="91" width="32" height="19.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -388,6 +385,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="6XY-x1-5IP" firstAttribute="top" secondItem="NQH-rD-AbD" secondAttribute="bottom" id="3E7-Vc-0Aq"/>
                             <constraint firstAttribute="centerX" secondItem="NHr-v0-uoi" secondAttribute="centerX" id="8NV-BU-hYt"/>
@@ -407,6 +405,9 @@
                                 <exclude reference="3E7-Vc-0Aq"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="0rk-AF-gSo" appends="YES" id="EnU-jR-9BO"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="inputField" destination="cFr-Hq-zK0" id="VHg-Jy-JL1"/>
@@ -417,9 +418,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mab-Gy-fbY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer id="7j5-eA-yUX">
+                <pinchGestureRecognizer id="0rk-AF-gSo">
                     <connections>
-                        <action selector="scaleText:" destination="rCH-Tk-dw9" id="hHK-Lw-lva"/>
+                        <action selector="scaleText:" destination="rCH-Tk-dw9" id="tWF-ro-pbw"/>
                     </connections>
                 </pinchGestureRecognizer>
             </objects>

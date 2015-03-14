@@ -33,11 +33,7 @@ class StudyQuoteViewController: UIViewController {
     private var timer = NSTimer()
     private var quoteFontSize: CGFloat = UIFont.labelFontSize() {
         didSet {
-            if let font = UIFont(name: "Helvetica Neue", size: quoteFontSize) {
-                var attrText = NSMutableAttributedString(attributedString: quoteText.attributedText)
-                attrText.addAttribute(NSFontAttributeName, value: font, range: NSMakeRange(0, attrText.length))
-                quoteText.attributedText = attrText
-            }
+            reloadQuote(false)
         }
     }
     private var currentDuration: NSTimeInterval? {
@@ -70,8 +66,11 @@ class StudyQuoteViewController: UIViewController {
     }
     
 
-    @IBAction func scaleText(sender: UIPinchGestureRecognizer) {
-        
+    @IBAction func scaleText(gesture: UIPinchGestureRecognizer) {
+        if gesture.state == .Changed {
+            quoteFontSize *= gesture.scale
+            gesture.scale = 1
+        }
     }
     //MARK: - Time Functions
     
