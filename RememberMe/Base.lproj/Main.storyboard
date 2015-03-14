@@ -43,7 +43,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Oik-Ej-hE2" kind="show" identifier="quoteTableToQuoteDetail" id="8rt-Cc-wdq"/>
+                                    <segue destination="Oik-Ej-hE2" kind="show" identifier="quoteTableToDetail" id="8rt-Cc-wdq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -711,7 +711,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ums-1Y-Yxh"/>
-        <segue reference="jcq-h5-Gbd"/>
+        <segue reference="8rt-Cc-wdq"/>
+        <segue reference="cKw-Fk-i1u"/>
     </inferredMetricsTieBreakers>
 </document>

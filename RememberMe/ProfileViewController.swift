@@ -15,17 +15,27 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
 
     var userDefaults = NSUserDefaults.standardUserDefaults()
+    var quotesCache = [String: [Quote]]()
+    let keyArr = ["memorized", "inProgress", "recent"]
 
-    private func setQuotes(key: String) {
+    private func fetchQuotesFromKey(key: String) -> [Quote] {
         let hashArr = userDefaults.valueForKey(key) as [String]
         var fetchReq = NSFetchRequest(entityName: "Quote")
         var error: NSError? = NSError()
-        let quoteArr = managedObjectContext.executeFetchRequest(fetchReq, error: &error) as [Quote]
-        quotes = quoteArr.filter { contains(hashArr, $0.strID()) }
+        let fetchResult = managedObjectContext.executeFetchRequest(fetchReq, error: &error) as [Quote]
+        return fetchResult.filter { contains(hashArr, $0.strID()) }
+    }
+    private func setQuotes(key: String) {
+        if let quoteArr = quotesCache[key] {
+            quotes = quoteArr
+        } else {
+            let quoteArr = fetchQuotesFromKey(key)
+            quotesCache[key] = quoteArr
+            quotes = quoteArr
+        }
     }
 
     @IBAction func tabChanged(sender: UISegmentedControl) {
-        let keyArr = ["memorized", "inProgress", "recent"]
         setQuotes(keyArr[sender.selectedSegmentIndex])
     }
     
@@ -42,7 +52,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let qos = Int(QOS_CLASS_USER_INITIATED.value)
+        dispatch_async(dispatch_get_global_queue(qos, 0)) { () -> Void in
+            for key in self.keyArr {
+                self.quotesCache[key] = self.fetchQuotesFromKey(key)
+            }
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -77,41 +92,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+ 
 
     // MARK: - Navigation
 
