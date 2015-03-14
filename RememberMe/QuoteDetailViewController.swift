@@ -13,7 +13,6 @@ class QuoteDetailViewController: UIViewController {
     var quote: Quote?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
 
         // Do any additional setup after loading the view.
     }
@@ -43,6 +42,15 @@ class QuoteDetailViewController: UIViewController {
                     studyQuote.quote = quote
                 }
             
+            } else if identifier == "editQuote" {
+                var destination = segue.destinationViewController as? UIViewController
+                if let navCon = destination as? UINavigationController {
+                    destination = navCon.visibleViewController
+                }
+                if let saveQuote = destination as? QuoteSaveViewController {
+                    saveQuote.quote = quote
+                }
+
             }
         }
     }

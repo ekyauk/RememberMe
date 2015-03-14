@@ -15,7 +15,6 @@ class StudyQuoteViewController: UIViewController {
 
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
-    
     let studyVariables = NSUserDefaults.standardUserDefaults()
 
     private struct QuoteWord {
@@ -32,6 +31,15 @@ class StudyQuoteViewController: UIViewController {
     private var numWrong = 0
     private var guessIndex = 0
     private var timer = NSTimer()
+    private var quoteFontSize: CGFloat = UIFont.labelFontSize() {
+        didSet {
+            if let font = UIFont(name: "Helvetica Neue", size: quoteFontSize) {
+                var attrText = NSMutableAttributedString(attributedString: quoteText.attributedText)
+                attrText.addAttribute(NSFontAttributeName, value: font, range: NSMakeRange(0, attrText.length))
+                quoteText.attributedText = attrText
+            }
+        }
+    }
     private var currentDuration: NSTimeInterval? {
         didSet {
             if let duration = currentDuration {
@@ -52,11 +60,19 @@ class StudyQuoteViewController: UIViewController {
                     QuoteWord(text: $0, hidden: false)
                 }
                 currentDuration = q.currentTime.timeIntervalSinceReferenceDate
+                var inProgress = self.studyVariables.valueForKey("inProgress") as [String]
+                if !contains(inProgress, q.strID()) {
+                    inProgress.insert(q.strID(), atIndex: 0)
+                    self.studyVariables.setValue(inProgress, forKey: "inProgress")
+                }
             }
         }
     }
     
 
+    @IBAction func scaleText(sender: UIPinchGestureRecognizer) {
+        
+    }
     //MARK: - Time Functions
     
     func incrementTime() {
@@ -91,6 +107,15 @@ class StudyQuoteViewController: UIViewController {
         }
         timer.invalidate()
         currentDuration = NSTimeInterval(0)
+        var memorized = studyVariables.valueForKey("memorized") as [String]
+        memorized.insert(quote!.strID() , atIndex: 0)
+        if memorized.count > 50 {
+            memorized.removeLast()
+        }
+        studyVariables.setObject(memorized, forKey: "memorized")
+        if let inProgress = studyVariables.valueForKey("inProgress") as? [String] {
+            studyVariables.setValue(inProgress.filter { $0 != self.quote!.strID() }, forKey: "inProgress")
+        }
         showFinishedAlert()
     }
     private func binarySearch(numbers: [Int], target: Int, low: Int, high: Int) -> Bool {
@@ -154,7 +179,7 @@ class StudyQuoteViewController: UIViewController {
         
         // Adds attributes to text
         attrText.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: blackRange)
-        attrText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: UIFont.labelFontSize())!, range: NSMakeRange(0, attrText.length))
+        attrText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: quoteFontSize)!, range: NSMakeRange(0, attrText.length))
         var guessWordColor = UIColor.grayColor()
         if numWrong > 0 {
             guessWordColor = UIColor.redColor()
@@ -265,6 +290,7 @@ class StudyQuoteViewController: UIViewController {
             NSLog("Unresolved error: \(error), \(error!.userInfo)")
             abort()
         }
+        studyVariables.synchronize()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -272,14 +298,23 @@ class StudyQuoteViewController: UIViewController {
     }
 
 
-    /*
+
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        var destination = segue.destinationViewController as? UIViewController
+        if let navCon = destination as? UINavigationController {
+            destination = navCon.visibleViewController
+        }
+        if let quoteDetailViewController = destination as? QuoteDetailViewController {
+            if let identifier = segue.identifier {
+                if identifier == "finishStudy" {
+                    quoteDetailViewController.quote = quote
+                }
+            }
+        }
     }
-    */
+
 
 }
 /* Taken from http://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language */

@@ -15,6 +15,7 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
 
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
+    let userDefaults = NSUserDefaults.standardUserDefaults()
 
     var quotes = [[Quote]]()
     var group: QuoteGroup?
@@ -95,7 +96,7 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "quoteDetail" {
+        if segue.identifier == "quoteTableToDetail" {
             var destination = segue.destinationViewController as? UIViewController
             if let navCon = destination as? UINavigationController {
                 destination = navCon.visibleViewController
@@ -116,10 +117,18 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
             source = navCon.visibleViewController
         }
         if let saveView = source as? QuoteSaveViewController {
-            saveView.quote!.addGroup(group!)
-            quotes[0].append(saveView.quote!)
-            quotes[0].sort {
-                $0.title < $1.title
+            if let q = saveView.quote {
+                if q.quoteGroups.count == 0 {
+                    q.addGroup(group!)
+                    quotes[0].append(q)
+                    quotes[0].sort {
+                        $0.title < $1.title
+                    }
+                    var recent = userDefaults.valueForKey("recent") as [String]
+                    recent.insert(q.strID(), atIndex: 0)
+                    userDefaults.setValue(recent, forKey: "recent")
+                    userDefaults.synchronize()
+                }
             }
         }
 

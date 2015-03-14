@@ -23,9 +23,12 @@ class QuoteSaveViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if let q = quote {
+            titleField.text = q.title
+            quoteField.text = q.text
+        }
     }
 
     // MARK: - Navigation

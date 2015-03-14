@@ -24,4 +24,8 @@ class Quote: NSManagedObject {
         group.quotes = newQuotesSet
         self.quoteGroups = newGroupsSet
     }
+    
+    func strID() -> String {
+        return "\(self.objectID)"
+    }
 }

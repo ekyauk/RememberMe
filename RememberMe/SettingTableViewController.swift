@@ -35,7 +35,6 @@ class SettingTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.userInteractionEnabled = true
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -48,12 +47,6 @@ class SettingTableViewController: UITableViewController {
         let number = studyVariables.integerForKey("numAttempts")
         attemptsLabel.text = "\(number) Attempts Before Reveal"
         attemptsStepper.value = Double(number)
-    }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        super.touchesBegan(touches, withEvent: event)
-        println("he's touching meeee")
-        self.view.endEditing(true)
     }
 
     override func viewDidDisappear(animated: Bool) {

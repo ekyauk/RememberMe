@@ -24,6 +24,7 @@
 		70E9DCA21AAEC4FA00A8A4BE /* kjvdat.txt in Resources */ = {isa = PBXBuildFile; fileRef = 70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */; };
 		70E9DCB81AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */; };
 		70E9DCBA1AAF945300A8A4BE /* QuoteGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */; };
+		70FBF4BC1AB3A69300A21861 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBF4BB1AB3A69300A21861 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kjvdat.txt; sourceTree = "<group>"; };
 		70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupsTableViewController.swift; sourceTree = "<group>"; };
 		70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupTableViewCell.swift; sourceTree = "<group>"; };
+		70FBF4BB1AB3A69300A21861 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				70C2E0F81AA66BDA00DD09B8 /* AppDelegate.swift */,
 				705BABCF1AA66C80003A20C5 /* QuotesTableViewController.swift */,
 				70C2E0FF1AA66BDB00DD09B8 /* Main.storyboard */,
+				70FBF4BB1AB3A69300A21861 /* ProfileViewController.swift */,
 				7045762A1AB23F8200870E78 /* SettingTableViewController.swift */,
 				70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */,
 				7015F6821AAD6C53004C58DD /* QuoteSaveViewController.swift */,
@@ -246,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70FBF4BC1AB3A69300A21861 /* ProfileViewController.swift in Sources */,
 				7045762B1AB23F8200870E78 /* SettingTableViewController.swift in Sources */,
 				7087CE521AA9975200190F73 /* QuoteDetailViewController.swift in Sources */,
 				70C2E0FC1AA66BDB00DD09B8 /* RememberMe.xcdatamodeld in Sources */,

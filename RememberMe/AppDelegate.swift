@@ -29,6 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if studyVariables.valueForKey("numAttempts") == nil {
             studyVariables.setInteger(5, forKey: "numAttempts")
         }
+        if studyVariables.valueForKey("memorized") == nil {
+            studyVariables.setObject([String](), forKey: "memorized")
+        }
+        if studyVariables.valueForKey("inProgress") == nil {
+            studyVariables.setValue([String](), forKey: "inProgress")
+        }
+        if studyVariables.valueForKey("recent") == nil {
+            studyVariables.setValue([String](), forKey: "recent")
+        }
         studyVariables.synchronize()
     }
 
