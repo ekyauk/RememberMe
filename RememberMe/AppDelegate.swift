@@ -43,6 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if studyVariables.valueForKey("recent") == nil {
             studyVariables.setValue([String](), forKey: "recent")
         }
+        if studyVariables.valueForKey("favorites") == nil {
+            studyVariables.setValue([String](), forKey: "favorites")
+        }
+
         studyVariables.synchronize()
     }
 

@@ -8,23 +8,25 @@
 
 import UIKit
 import CoreData
+
+func fetchQuotesFromKey(key: String) -> [Quote] {
+    let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let hashArr = userDefaults.valueForKey(key) as [String]
+    var fetchReq = NSFetchRequest(entityName: "Quote")
+    var error: NSError? = NSError()
+    let fetchResult = managedObjectContext.executeFetchRequest(fetchReq, error: &error) as [Quote]
+    return fetchResult.filter { contains(hashArr, $0.strID()) }
+}
+
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var wpmLabel: UILabel!
     @IBOutlet weak var tableControlChoice: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
 
-    var userDefaults = NSUserDefaults.standardUserDefaults()
     var quotesCache = [String: [Quote]]()
     let keyArr = ["memorized", "inProgress", "recent"]
 
-    private func fetchQuotesFromKey(key: String) -> [Quote] {
-        let hashArr = userDefaults.valueForKey(key) as [String]
-        var fetchReq = NSFetchRequest(entityName: "Quote")
-        var error: NSError? = NSError()
-        let fetchResult = managedObjectContext.executeFetchRequest(fetchReq, error: &error) as [Quote]
-        return fetchResult.filter { contains(hashArr, $0.strID()) }
-    }
     private func setQuotes(key: String) {
         if let quoteArr = quotesCache[key] {
             quotes = quoteArr
@@ -55,7 +57,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let qos = Int(QOS_CLASS_USER_INITIATED.value)
         dispatch_async(dispatch_get_global_queue(qos, 0)) { () -> Void in
             for key in self.keyArr {
-                self.quotesCache[key] = self.fetchQuotesFromKey(key)
+                self.quotesCache[key] = fetchQuotesFromKey(key)
             }
         }
         // Uncomment the following line to preserve selection between presentations

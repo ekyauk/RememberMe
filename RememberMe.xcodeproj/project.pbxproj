@@ -25,6 +25,7 @@
 		70E9DCB81AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */; };
 		70E9DCBA1AAF945300A8A4BE /* QuoteGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */; };
 		70FBF4BC1AB3A69300A21861 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBF4BB1AB3A69300A21861 /* ProfileViewController.swift */; };
+		70FBF4BE1AB3FBB600A21861 /* RememberMeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBF4BD1AB3FBB600A21861 /* RememberMeTabViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupsTableViewController.swift; sourceTree = "<group>"; };
 		70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupTableViewCell.swift; sourceTree = "<group>"; };
 		70FBF4BB1AB3A69300A21861 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		70FBF4BD1AB3FBB600A21861 /* RememberMeTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RememberMeTabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */,
 				70C2E0F81AA66BDA00DD09B8 /* AppDelegate.swift */,
 				705BABCF1AA66C80003A20C5 /* QuotesTableViewController.swift */,
+				70FBF4BD1AB3FBB600A21861 /* RememberMeTabViewController.swift */,
 				70C2E0FF1AA66BDB00DD09B8 /* Main.storyboard */,
 				70FBF4BB1AB3A69300A21861 /* ProfileViewController.swift */,
 				7045762A1AB23F8200870E78 /* SettingTableViewController.swift */,
@@ -252,6 +255,7 @@
 				70FBF4BC1AB3A69300A21861 /* ProfileViewController.swift in Sources */,
 				7045762B1AB23F8200870E78 /* SettingTableViewController.swift in Sources */,
 				7087CE521AA9975200190F73 /* QuoteDetailViewController.swift in Sources */,
+				70FBF4BE1AB3FBB600A21861 /* RememberMeTabViewController.swift in Sources */,
 				70C2E0FC1AA66BDB00DD09B8 /* RememberMe.xcdatamodeld in Sources */,
 				7018F78E1AA6BE6300364B85 /* QuoteTableViewCell.swift in Sources */,
 				70E9DCB81AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift in Sources */,

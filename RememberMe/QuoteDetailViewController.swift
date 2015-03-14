@@ -16,14 +16,48 @@ class QuoteDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     @IBOutlet weak var quoteTitle: UILabel!
     @IBOutlet weak var quoteText: UITextView!
     @IBOutlet weak var bestTime: UILabel!
     @IBOutlet weak var currentTime: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
 
+    private func addToFavorites() {
+        var favorites = userDefaults.valueForKey("favorites") as [String]
+        favorites.insert(quote!.strID(), atIndex: 0)
+        userDefaults.setValue(favorites, forKey: "favorites")
+        userDefaults.synchronize()
+    }
+    private func removeFromFavorites(index: Int) {
+        var favorites = userDefaults.valueForKey("favorites") as [String]
+        favorites.removeAtIndex(index)
+        userDefaults.setValue(favorites, forKey: "favorites")
+        userDefaults.synchronize()
+    }
+
+    @IBAction func toggleFavorite(sender: UIButton) {
+        if let label = sender.titleLabel {
+            var favorites = userDefaults.valueForKey("favorites") as [String]
+            if let index = find(favorites, quote!.strID()) {
+                removeFromFavorites(index)
+                favoriteButton.titleLabel?.alpha = 0.25
+            } else {
+                addToFavorites()
+                favoriteButton.titleLabel?.alpha = 1
+            }
+        }
+    }
+    
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        var favorites = userDefaults.valueForKey("favorites") as [String]
+        if let index = find(favorites, quote!.strID()) {
+            favoriteButton.titleLabel?.alpha = 1
+        } else {
+            favoriteButton.titleLabel?.alpha = 0.25
+        }
         quoteTitle.text = quote?.title
         quoteText.text = quote?.text
         bestTime.text = quote!.bestTime.timeIntervalSinceReferenceDate.toString()

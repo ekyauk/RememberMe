@@ -258,12 +258,14 @@ class StudyQuoteViewController: UIViewController {
     }
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
-        switch motion {
-        case .MotionShake:
-            hideRandomWord()
-            reloadQuote(true)
-        default:
-            return
+        if studyVariables.boolForKey("shakeEnabled") {
+            switch motion {
+            case .MotionShake:
+                hideRandomWord()
+                reloadQuote(true)
+            default:
+                return
+            }
         }
     }
 

@@ -96,7 +96,7 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "quoteTableToDetail" {
+        if segue.identifier == "quoteTableToDetail" || segue.identifier == "fromFavorites" {
             var destination = segue.destinationViewController as? UIViewController
             if let navCon = destination as? UINavigationController {
                 destination = navCon.visibleViewController
@@ -119,7 +119,9 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
         if let saveView = source as? QuoteSaveViewController {
             if let q = saveView.quote {
                 if q.quoteGroups.count == 0 {
-                    q.addGroup(group!)
+                    if group != nil {
+                        q.addGroup(group!)
+                    }
                     quotes[0].append(q)
                     quotes[0].sort {
                         $0.title < $1.title
