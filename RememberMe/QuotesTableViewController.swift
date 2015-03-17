@@ -50,8 +50,8 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
             abort()
         }
     }
-
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         self.tableView.reloadData()
     }
 
@@ -83,6 +83,8 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
         } else {
             cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as? QuoteTableViewCell
         }
+        println(quotes[0].count)
+        println(indexPath.row)
         cell!.quote = tableView == self.searchDisplayController!.searchResultsTableView ? filteredQuotes[indexPath.row] : quotes[indexPath.section][indexPath.row]
         return cell!
     }

@@ -111,7 +111,7 @@ class StudyQuoteViewController: UIViewController {
         if memorized.count > 50 {
             memorized.removeLast()
         }
-        studyVariables.setObject(memorized, forKey: "memorized")
+        studyVariables.setValue(memorized, forKey: "memorized")
         if let inProgress = studyVariables.valueForKey("inProgress") as? [String] {
             studyVariables.setValue(inProgress.filter { $0 != self.quote!.strID() }, forKey: "inProgress")
         }

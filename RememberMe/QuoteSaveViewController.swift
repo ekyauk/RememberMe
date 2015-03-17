@@ -63,7 +63,11 @@ class QuoteSaveViewController: UIViewController {
             NSLog("Unresolved error: \(error), \(error!.userInfo)")
             abort()
         }
-
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        var recent = userDefaults.valueForKey("recent") as [String]
+        recent.insert(quote!.strID(), atIndex: 0)
+        userDefaults.setValue(recent, forKey: "recent")
+        userDefaults.synchronize()
     }
 
 
