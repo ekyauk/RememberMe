@@ -24,6 +24,10 @@
 		70E9DCA21AAEC4FA00A8A4BE /* kjvdat.txt in Resources */ = {isa = PBXBuildFile; fileRef = 70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */; };
 		70E9DCB81AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */; };
 		70E9DCBA1AAF945300A8A4BE /* QuoteGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */; };
+		70F2AC781ABB435C00660A75 /* Settings-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F2AC771ABB435C00660A75 /* Settings-32.png */; };
+		70F2AC7A1ABB439700660A75 /* Star-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F2AC791ABB439700660A75 /* Star-32.png */; };
+		70F2AC7C1ABB43E600660A75 /* User Male Circle-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F2AC7B1ABB43E500660A75 /* User Male Circle-32.png */; };
+		70F2AC7E1ABB440C00660A75 /* Quote-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F2AC7D1ABB440C00660A75 /* Quote-32.png */; };
 		70FBF4BC1AB3A69300A21861 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBF4BB1AB3A69300A21861 /* ProfileViewController.swift */; };
 		70FBF4BE1AB3FBB600A21861 /* RememberMeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBF4BD1AB3FBB600A21861 /* RememberMeTabViewController.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +64,10 @@
 		70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kjvdat.txt; sourceTree = "<group>"; };
 		70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupsTableViewController.swift; sourceTree = "<group>"; };
 		70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupTableViewCell.swift; sourceTree = "<group>"; };
+		70F2AC771ABB435C00660A75 /* Settings-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings-32.png"; sourceTree = "<group>"; };
+		70F2AC791ABB439700660A75 /* Star-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Star-32.png"; sourceTree = "<group>"; };
+		70F2AC7B1ABB43E500660A75 /* User Male Circle-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "User Male Circle-32.png"; sourceTree = "<group>"; };
+		70F2AC7D1ABB440C00660A75 /* Quote-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Quote-32.png"; sourceTree = "<group>"; };
 		70FBF4BB1AB3A69300A21861 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		70FBF4BD1AB3FBB600A21861 /* RememberMeTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RememberMeTabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +136,10 @@
 		70C2E0F61AA66BDA00DD09B8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				70F2AC7D1ABB440C00660A75 /* Quote-32.png */,
+				70F2AC7B1ABB43E500660A75 /* User Male Circle-32.png */,
+				70F2AC791ABB439700660A75 /* Star-32.png */,
+				70F2AC771ABB435C00660A75 /* Settings-32.png */,
 				70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */,
 				70C2E0F71AA66BDA00DD09B8 /* Info.plist */,
 			);
@@ -232,9 +244,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				70E9DCA21AAEC4FA00A8A4BE /* kjvdat.txt in Resources */,
+				70F2AC781ABB435C00660A75 /* Settings-32.png in Resources */,
 				70C2E1011AA66BDB00DD09B8 /* Main.storyboard in Resources */,
 				70C2E1061AA66BDB00DD09B8 /* LaunchScreen.xib in Resources */,
+				70F2AC7C1ABB43E600660A75 /* User Male Circle-32.png in Resources */,
+				70F2AC7A1ABB439700660A75 /* Star-32.png in Resources */,
 				70C2E1031AA66BDB00DD09B8 /* Images.xcassets in Resources */,
+				70F2AC7E1ABB440C00660A75 /* Quote-32.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

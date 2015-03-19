@@ -166,7 +166,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="736-wj-Kue">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Quote Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="736-wj-Kue">
                                 <rect key="frame" x="16" y="30" width="568" height="19.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -206,7 +206,7 @@
                                     <segue destination="rCH-Tk-dw9" kind="show" identifier="studyQuote" id="cXe-WO-ci0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GT2-Qc-bxP">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GT2-Qc-bxP">
                                 <rect key="frame" x="16" y="20" width="32" height="51"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="★">
@@ -217,7 +217,7 @@
                                     <action selector="toggleFavorite:" destination="Oik-Ej-hE2" eventType="touchUpInside" id="8CN-8Y-dNP"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Quote" translatesAutoresizingMaskIntoConstraints="NO" id="Srn-BV-jNx">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="Quote" translatesAutoresizingMaskIntoConstraints="NO" id="Srn-BV-jNx">
                                 <rect key="frame" x="16" y="71" width="568" height="399"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -387,20 +387,20 @@
                                     <action selector="valueChanged:" destination="rCH-Tk-dw9" eventType="editingChanged" id="aaS-GT-8pi"/>
                                 </connections>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XY-x1-5IP">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XY-x1-5IP">
                                 <rect key="frame" x="16" y="66.5" width="568" height="459.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="no"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQH-rD-AbD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQH-rD-AbD">
                                 <rect key="frame" x="527.5" y="30" width="56.5" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHr-v0-uoi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHr-v0-uoi">
                                 <rect key="frame" x="284" y="47" width="32" height="19.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -519,7 +519,7 @@
         <scene sceneID="9Yd-jj-SBR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LQK-jj-QOz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Quotes" id="hJZ-Vw-NbI"/>
+                    <tabBarItem key="tabBarItem" title="Quotes" image="Quote-32.png" id="hJZ-Vw-NbI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YAe-Eg-Rhc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -699,7 +699,7 @@
                             <outlet property="delegate" destination="T9G-ge-HT4" id="VqO-rI-EgA"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" id="Bwf-he-Uqv"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings-32.png" id="Bwf-he-Uqv"/>
                     <connections>
                         <outlet property="attemptsLabel" destination="aP0-eb-QdA" id="tSN-5M-nOR"/>
                         <outlet property="attemptsStepper" destination="zIf-sf-ulj" id="Y6A-PN-fBe"/>
@@ -718,7 +718,7 @@
         <scene sceneID="f9l-QT-rFW">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Oyk-qI-nJd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="JNu-S7-SEX"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="User Male Circle-32.png" id="JNu-S7-SEX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rGx-dw-PtR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -787,7 +787,7 @@
         <scene sceneID="D8K-2R-2e0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZKP-ma-kCj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" id="IYc-8m-V1t"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="Star-32.png" id="IYc-8m-V1t"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gxn-ah-gpg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -803,8 +803,14 @@
             <point key="canvasLocation" x="1015" y="440"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Quote-32.png" width="32" height="32"/>
+        <image name="Settings-32.png" width="32" height="32"/>
+        <image name="Star-32.png" width="32" height="32"/>
+        <image name="User Male Circle-32.png" width="32" height="32"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ums-1Y-Yxh"/>
+        <segue reference="8rt-Cc-wdq"/>
         <segue reference="cKw-Fk-i1u"/>
     </inferredMetricsTieBreakers>
 </document>
