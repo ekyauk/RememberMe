@@ -15,7 +15,7 @@ class StudyQuoteViewController: UIViewController {
 
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
-    let studyVariables = NSUserDefaults.standardUserDefaults()
+    let userDefaults = NSUserDefaults.standardUserDefaults()
 
     private struct QuoteWord {
         var text: String = ""
@@ -56,10 +56,10 @@ class StudyQuoteViewController: UIViewController {
                     QuoteWord(text: $0, hidden: false)
                 }
                 currentDuration = q.currentTime.timeIntervalSinceReferenceDate
-                var inProgress = self.studyVariables.valueForKey("inProgress") as [String]
+                var inProgress = self.userDefaults.valueForKey("inProgress") as [String]
                 if !contains(inProgress, q.strID()) {
                     inProgress.insert(q.strID(), atIndex: 0)
-                    self.studyVariables.setValue(inProgress, forKey: "inProgress")
+                    self.userDefaults.setValue(inProgress, forKey: "inProgress")
                 }
             }
         }
@@ -99,21 +99,33 @@ class StudyQuoteViewController: UIViewController {
         alert.addAction(done)
         presentViewController(alert, animated: true, completion: nil)
     }
+    
+    private func updateAverage() {
+        var timeStudying: Double = userDefaults.doubleForKey("timeStudying")
+        var wps: Double = userDefaults.doubleForKey("wps")
+        var totalWords: Int = Int(timeStudying * wps) + words.count
+        timeStudying += currentDuration!
+        wps = Double(totalWords)/timeStudying
+        userDefaults.setDouble(wps, forKey: "wps")
+        userDefaults.setDouble(timeStudying, forKey: "timeStudying")
+        userDefaults.synchronize()
+    }
 
     private func finishRemembering() {
         if quote?.bestTime.timeIntervalSinceReferenceDate == 0.0 || quote?.bestTime.timeIntervalSinceReferenceDate > currentDuration! {
             quote?.bestTime = NSDate(timeIntervalSinceReferenceDate: currentDuration!)
         }
         timer.invalidate()
+        updateAverage()
         currentDuration = NSTimeInterval(0)
-        var memorized = studyVariables.valueForKey("memorized") as [String]
+        var memorized = userDefaults.valueForKey("memorized") as [String]
         memorized.insert(quote!.strID() , atIndex: 0)
         if memorized.count > 50 {
             memorized.removeLast()
         }
-        studyVariables.setValue(memorized, forKey: "memorized")
-        if let inProgress = studyVariables.valueForKey("inProgress") as? [String] {
-            studyVariables.setValue(inProgress.filter { $0 != self.quote!.strID() }, forKey: "inProgress")
+        userDefaults.setValue(memorized, forKey: "memorized")
+        if let inProgress = userDefaults.valueForKey("inProgress") as? [String] {
+            userDefaults.setValue(inProgress.filter { $0 != self.quote!.strID() }, forKey: "inProgress")
         }
         showFinishedAlert()
     }
@@ -222,8 +234,8 @@ class StudyQuoteViewController: UIViewController {
             guessIndex++
             if guessIndex == words.count {
                 if revealedWords.count > 0 {
-                    let min: Int = studyVariables.integerForKey("minHidden")
-                    let max: Int = studyVariables.integerForKey("maxHidden")
+                    let min: Int = userDefaults.integerForKey("minHidden")
+                    let max: Int = userDefaults.integerForKey("maxHidden")
                     let range = max - min
                     let numHidden = arc4random_uniform(UInt32(range)) + min
                     for var i: UInt32 = 0; i < numHidden; ++i {
@@ -241,7 +253,7 @@ class StudyQuoteViewController: UIViewController {
         } else {
             numWrong++
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-            if numWrong >= studyVariables.integerForKey("numAttempts") {
+            if numWrong >= userDefaults.integerForKey("numAttempts") {
                 words[guessIndex].hidden = false
                 reloadQuote(true)
 
@@ -258,7 +270,7 @@ class StudyQuoteViewController: UIViewController {
     }
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
-        if studyVariables.boolForKey("shakeEnabled") {
+        if userDefaults.boolForKey("shakeEnabled") {
             switch motion {
             case .MotionShake:
                 hideRandomWord()
@@ -291,7 +303,7 @@ class StudyQuoteViewController: UIViewController {
             NSLog("Unresolved error: \(error), \(error!.userInfo)")
             abort()
         }
-        studyVariables.synchronize()
+        userDefaults.synchronize()
     }
     
     override func viewDidAppear(animated: Bool) {

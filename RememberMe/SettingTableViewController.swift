@@ -58,7 +58,7 @@ class SettingTableViewController: UITableViewController {
         }
         studyVariables.setInteger(max, forKey: "maxHidden")
         studyVariables.setInteger(Int(attemptsStepper.value), forKey: "numAttempts")
-        studyVariables.setBool(shakeToHideSwitch.selected, forKey: "shakeEnabled")
+        studyVariables.setBool(shakeToHideSwitch.on, forKey: "shakeEnabled")
         studyVariables.synchronize()
     }
 

@@ -20,9 +20,10 @@ func fetchQuotesFromKey(key: String) -> [Quote] {
 }
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var wpmLabel: UILabel!
+    @IBOutlet weak var statsLabel: UILabel!
     @IBOutlet weak var tableControlChoice: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    let userDefaults = NSUserDefaults.standardUserDefaults()
 
     var quotesCache = [String: [Quote]]()
     let keyArr = ["memorized", "inProgress", "recent"]
@@ -47,8 +48,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    private func setStats() {
+        let timeStudying: NSTimeInterval = userDefaults.doubleForKey("timeStudying")
+        let wps: Double = userDefaults.doubleForKey("wps")
+        statsLabel.text = "Avg Words Memorized Per Second: " + String(format: "%.2f", wps) + "\n"
+        statsLabel.text = statsLabel.text! + "Total time studying: \(timeStudying.toString())"
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        setStats()
         tabChanged(tableControlChoice)
     }
 

@@ -19,35 +19,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let studyVariables = NSUserDefaults.standardUserDefaults()
+    let userDefaults = NSUserDefaults.standardUserDefaults()
 
     private func initializeVariables() {
-        if studyVariables.valueForKey("shakeEnabled") == nil {
-            studyVariables.setBool(true, forKey: "shakeEnabled")
+        if userDefaults.valueForKey("shakeEnabled") == nil {
+            userDefaults.setBool(true, forKey: "shakeEnabled")
         }
-        if studyVariables.valueForKey("minHidden") == nil {
-            studyVariables.setInteger(1, forKey: "minHidden")
+        if userDefaults.valueForKey("minHidden") == nil {
+            userDefaults.setInteger(1, forKey: "minHidden")
         }
-        if studyVariables.valueForKey("maxHidden") == nil {
-            studyVariables.setInteger(1, forKey: "maxHidden")
+        if userDefaults.valueForKey("maxHidden") == nil {
+            userDefaults.setInteger(1, forKey: "maxHidden")
         }
-        if studyVariables.valueForKey("numAttempts") == nil {
-            studyVariables.setInteger(5, forKey: "numAttempts")
+        if userDefaults.valueForKey("numAttempts") == nil {
+            userDefaults.setInteger(5, forKey: "numAttempts")
         }
-        if studyVariables.valueForKey("memorized") == nil {
-            studyVariables.setObject([String](), forKey: "memorized")
+        if userDefaults.valueForKey("memorized") == nil {
+            userDefaults.setValue([String](), forKey: "memorized")
         }
-        if studyVariables.valueForKey("inProgress") == nil {
-            studyVariables.setValue([String](), forKey: "inProgress")
+        if userDefaults.valueForKey("inProgress") == nil {
+            userDefaults.setValue([String](), forKey: "inProgress")
         }
-        if studyVariables.valueForKey("recent") == nil {
-            studyVariables.setValue([String](), forKey: "recent")
+        if userDefaults.valueForKey("recent") == nil {
+            userDefaults.setValue([String](), forKey: "recent")
         }
-        if studyVariables.valueForKey("favorites") == nil {
-            studyVariables.setValue([String](), forKey: "favorites")
+        if userDefaults.valueForKey("favorites") == nil {
+            userDefaults.setValue([String](), forKey: "favorites")
         }
-
-        studyVariables.synchronize()
+        if userDefaults.valueForKey("timeStudying") == nil {
+            userDefaults.setDouble(0.0, forKey: "timeStudying")
+        }
+        if userDefaults.valueForKey("wps") == nil {
+            userDefaults.setDouble(0.0, forKey: "wps")
+        }
+        userDefaults.synchronize()
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
