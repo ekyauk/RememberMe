@@ -90,7 +90,7 @@ class QuotesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     // Allows selecting a cell on the search view to execute a segue
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView == self.searchDisplayController!.searchResultsTableView {
-            performSegueWithIdentifier("quoteDetail", sender: self.tableView(tableView, cellForRowAtIndexPath: indexPath))
+            performSegueWithIdentifier("quoteTableToDetail", sender: self.tableView(tableView, cellForRowAtIndexPath: indexPath))
         }
     }
 
