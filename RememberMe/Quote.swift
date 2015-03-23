@@ -16,6 +16,7 @@ class Quote: NSManagedObject {
     @NSManaged var inProgress: NSNumber
     @NSManaged var text: String
     @NSManaged var title: String
+    @NSManaged var progressText: String
     @NSManaged var quoteGroups: NSSet
 
     func addGroup(group: QuoteGroup) {
@@ -28,4 +29,13 @@ class Quote: NSManagedObject {
     func strID() -> String {
         return "\(self.objectID)"
     }
+    
+    override func awakeFromInsert() {
+        super.awakeFromInsert()
+        text = ""
+        title = ""
+        progressText = ""
+
+    }
+
 }

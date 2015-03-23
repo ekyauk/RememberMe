@@ -184,6 +184,7 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
                 loadData()
                 fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: nil) as [QuoteGroup]?
             }
+            fetchResults!.filter { $0.name != "All Quotes" }
             fetchResults!.sort {
                 $0.name < $1.name
             }

@@ -46,9 +46,7 @@ class StudyQuoteViewController: UIViewController {
         }
     }
     private var words = [QuoteWord]()
-    private lazy var revealedWords: [Int] = {
-        return Array(0...self.words.count-1)
-        }()
+    private var revealedWords: [Int] = [Int]()
     var quote: Quote? {
         didSet {
             if let q = quote {
@@ -60,6 +58,12 @@ class StudyQuoteViewController: UIViewController {
                 if !contains(inProgress, q.strID()) {
                     inProgress.insert(q.strID(), atIndex: 0)
                     self.userDefaults.setValue(inProgress, forKey: "inProgress")
+                }
+                let progressText = q.progressText
+                if progressText.isEmpty {
+                    revealedWords = [Int](0...(words.count-1))
+                } else {
+                    revealedWords = split(q.progressText) { $0 == "|" }.map { $0.toInt()! }
                 }
             }
         }
@@ -285,6 +289,7 @@ class StudyQuoteViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         titleLabel.text = quote?.title
         timeLabel.text = quote!.currentTime.timeIntervalSinceReferenceDate.toString()
+        resetText()
         reloadQuote(false)
         startTimer()
     }
@@ -297,8 +302,11 @@ class StudyQuoteViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         resignFirstResponder()
-        var error: NSError? = NSError()
+        let delimiter = "|"
+        let progress =  delimiter.join(revealedWords.map {"\($0)"})
+        quote!.progressText = delimiter.join(revealedWords.map {"\($0)"})
         quote!.currentTime = NSDate(timeIntervalSinceReferenceDate: currentDuration!)
+        var error: NSError? = NSError()
         if !managedObjectContext.save(&error) {
             NSLog("Unresolved error: \(error), \(error!.userInfo)")
             abort()

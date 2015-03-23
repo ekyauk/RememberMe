@@ -89,26 +89,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PbK-ae-EZe">
-                                <rect key="frame" x="16" y="122" width="568" height="209"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PbK-ae-EZe">
+                                <rect key="frame" x="16" y="166" width="568" height="165"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bpf-cE-qJh">
-                                <rect key="frame" x="16" y="30" width="568" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bpf-cE-qJh">
+                                <rect key="frame" x="16" y="74" width="568" height="19.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Quote" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijq-a7-E6w">
-                                <rect key="frame" x="16" y="102.5" width="568" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijq-a7-E6w">
+                                <rect key="frame" x="16" y="146.5" width="568" height="19.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title Here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1po-Iw-Jde">
-                                <rect key="frame" x="16" y="59.5" width="568" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title Here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1po-Iw-Jde">
+                                <rect key="frame" x="16" y="103.5" width="568" height="30"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -166,8 +166,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Quote Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="736-wj-Kue">
-                                <rect key="frame" x="16" y="30" width="568" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="736-wj-Kue">
+                                <rect key="frame" x="16" y="74" width="568" height="19.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -206,8 +206,8 @@
                                     <segue destination="rCH-Tk-dw9" kind="show" identifier="studyQuote" id="cXe-WO-ci0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GT2-Qc-bxP">
-                                <rect key="frame" x="16" y="20" width="32" height="51"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GT2-Qc-bxP">
+                                <rect key="frame" x="16" y="64" width="32" height="51"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="★">
                                     <color key="titleColor" red="0.89301215277777779" green="0.73451371525740805" blue="0.045534350730276965" alpha="1" colorSpace="calibratedRGB"/>
@@ -217,8 +217,8 @@
                                     <action selector="toggleFavorite:" destination="Oik-Ej-hE2" eventType="touchUpInside" id="8CN-8Y-dNP"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="Quote" translatesAutoresizingMaskIntoConstraints="NO" id="Srn-BV-jNx">
-                                <rect key="frame" x="16" y="71" width="568" height="399"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Quote" translatesAutoresizingMaskIntoConstraints="NO" id="Srn-BV-jNx">
+                                <rect key="frame" x="16" y="115" width="568" height="355"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -269,7 +269,7 @@
             </objects>
             <point key="canvasLocation" x="2994" y="-1330"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--My Profile-->
         <scene sceneID="5Su-zg-ShX">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="mNV-ta-XS2" customClass="ProfileViewController" customModule="RememberMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -292,14 +292,14 @@
                                     <action selector="tabChanged:" destination="mNV-ta-XS2" eventType="valueChanged" id="GKJ-fh-GDl"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Stats:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRc-r0-7Mv">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stats:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRc-r0-7Mv">
                                 <rect key="frame" x="16" y="74" width="568" height="19.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Words Memorized per Second:" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1H7-KI-YKd">
-                                <rect key="frame" x="16" y="108.5" width="568" height="19.5"/>
+                                <rect key="frame" x="16" y="108" width="568" height="19.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -356,7 +356,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="eHH-vv-RHk" secondAttribute="trailing" id="zmG-ys-urH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="vRn-IF-RqR"/>
+                    <navigationItem key="navigationItem" title="My Profile" id="vRn-IF-RqR"/>
                     <connections>
                         <outlet property="statsLabel" destination="1H7-KI-YKd" id="UlC-8d-rD1"/>
                         <outlet property="tableControlChoice" destination="eHH-vv-RHk" id="GKr-ck-At9"/>
@@ -387,21 +387,21 @@
                                     <action selector="valueChanged:" destination="rCH-Tk-dw9" eventType="editingChanged" id="aaS-GT-8pi"/>
                                 </connections>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XY-x1-5IP">
-                                <rect key="frame" x="16" y="66.5" width="568" height="459.5"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XY-x1-5IP">
+                                <rect key="frame" x="16" y="110.5" width="568" height="415.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="no"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQH-rD-AbD">
-                                <rect key="frame" x="527.5" y="30" width="56.5" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQH-rD-AbD">
+                                <rect key="frame" x="527.5" y="74" width="56.5" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHr-v0-uoi">
-                                <rect key="frame" x="284" y="47" width="32" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHr-v0-uoi">
+                                <rect key="frame" x="284" y="91" width="32" height="19.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -733,7 +733,7 @@
             </objects>
             <point key="canvasLocation" x="937" y="-603"/>
         </scene>
-        <!--Quotes Table View Controller-->
+        <!--Favorite Quotes-->
         <scene sceneID="5I0-rH-fzw">
             <objects>
                 <tableViewController id="H59-LX-7aM" customClass="QuotesTableViewController" customModule="RememberMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -765,7 +765,7 @@
                             <outlet property="delegate" destination="H59-LX-7aM" id="NFm-48-5Qv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="EYD-ax-NVU"/>
+                    <navigationItem key="navigationItem" title="Favorite Quotes" id="EYD-ax-NVU"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="ce5-6o-7y6" id="zHy-hO-0hB"/>
                     </connections>
@@ -810,7 +810,7 @@
         <image name="User Male Circle-32.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8rt-Cc-wdq"/>
+        <segue reference="GYb-IN-VAi"/>
         <segue reference="cKw-Fk-i1u"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -19,8 +19,8 @@
 		70C2E1061AA66BDB00DD09B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C2E1041AA66BDB00DD09B8 /* LaunchScreen.xib */; };
 		70C2E1121AA66BDB00DD09B8 /* RememberMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C2E1111AA66BDB00DD09B8 /* RememberMeTests.swift */; };
 		70D4CAAC1AA9294B001DAD20 /* StudyQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D4CAAB1AA9294B001DAD20 /* StudyQuoteViewController.swift */; };
-		70E15F721AB0FB3C003CC864 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E15F711AB0FB3C003CC864 /* Quote.swift */; };
 		70E15F761AB0FBEA003CC864 /* QuoteGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E15F751AB0FBEA003CC864 /* QuoteGroup.swift */; };
+		70E4A6571ABE7A6A00B705BD /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E4A6561ABE7A6A00B705BD /* Quote.swift */; };
 		70E9DCA21AAEC4FA00A8A4BE /* kjvdat.txt in Resources */ = {isa = PBXBuildFile; fileRef = 70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */; };
 		70E9DCB81AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */; };
 		70E9DCBA1AAF945300A8A4BE /* QuoteGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */; };
@@ -59,8 +59,8 @@
 		70C2E1101AA66BDB00DD09B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70C2E1111AA66BDB00DD09B8 /* RememberMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberMeTests.swift; sourceTree = "<group>"; };
 		70D4CAAB1AA9294B001DAD20 /* StudyQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQuoteViewController.swift; sourceTree = "<group>"; };
-		70E15F711AB0FB3C003CC864 /* Quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		70E15F751AB0FBEA003CC864 /* QuoteGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroup.swift; sourceTree = "<group>"; };
+		70E4A6561ABE7A6A00B705BD /* Quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kjvdat.txt; sourceTree = "<group>"; };
 		70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupsTableViewController.swift; sourceTree = "<group>"; };
 		70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupTableViewCell.swift; sourceTree = "<group>"; };
@@ -126,8 +126,8 @@
 				70C2E1021AA66BDB00DD09B8 /* Images.xcassets */,
 				70C2E1041AA66BDB00DD09B8 /* LaunchScreen.xib */,
 				70C2E0FA1AA66BDA00DD09B8 /* RememberMe.xcdatamodeld */,
+				70E4A6561ABE7A6A00B705BD /* Quote.swift */,
 				70E15F751AB0FBEA003CC864 /* QuoteGroup.swift */,
-				70E15F711AB0FB3C003CC864 /* Quote.swift */,
 				70C2E0F61AA66BDA00DD09B8 /* Supporting Files */,
 			);
 			path = RememberMe;
@@ -279,8 +279,8 @@
 				70E9DCBA1AAF945300A8A4BE /* QuoteGroupTableViewCell.swift in Sources */,
 				7015F6831AAD6C53004C58DD /* QuoteSaveViewController.swift in Sources */,
 				70C2E0F91AA66BDA00DD09B8 /* AppDelegate.swift in Sources */,
-				70E15F721AB0FB3C003CC864 /* Quote.swift in Sources */,
 				70D4CAAC1AA9294B001DAD20 /* StudyQuoteViewController.swift in Sources */,
+				70E4A6571ABE7A6A00B705BD /* Quote.swift in Sources */,
 				70E15F761AB0FBEA003CC864 /* QuoteGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
