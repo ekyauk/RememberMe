@@ -10,103 +10,6 @@ import UIKit
 import CoreData
 class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
 
-    let bibleTitles = [
-        "Gen":"Genesis",
-        "Exo":"Exodus",
-        "Lev":"Leviticus",
-        "Num":"Numbers",
-        "Deu":"Deuteronomy",
-        "Jos":"Joshua",
-        "Jdg":"Judges",
-        "Rut":"Ruth",
-        "Sa1":"1 Samuel",
-        "Sa2":"2 Samuel",
-        "Kg1":"1 Kings",
-        "Kg2":"2 Kings",
-        "Ch1":"1 Chronicles",
-        "Ch2":"2 Chronicles",
-        "Ezr":"Ezra",
-        "Neh":"Nehemiah",
-        "Est":"Esther",
-        "Job":"Job",
-        "Psa":"Psalms",
-        "Pro":"Proverbs",
-        "Ecc":"Ecclesiastes",
-        "Sol":"Song of Solomon",
-        "Isa":"Isaiah",
-        "Jer":"Jeremiah",
-        "Lam":"Lamentations",
-        "Eze":"Ezekiel",
-        "Dan":"Daniel",
-        "Hos":"Hosea",
-        "Joe":"Joel",
-        "Amo":"Amos",
-        "Oba":"Obadiah",
-        "Jon":"Jonah",
-        "Mic":"Micah",
-        "Nah":"Nahum",
-        "Hab":"Habakkuk",
-        "Zep":"Zephaniah",
-        "Hag":"Haggai",
-        "Zac":"Zechariah",
-        "Mal":"Malachi",
-        "Es1":"1 Esdras",
-        "Es2":"2 Esdras",
-        "Tob":"Tobias",
-        "Jdt":"Judith",
-        "Aes":"Additions to Esther",
-        "Wis":"Wisdom",
-        "Bar":"Baruch",
-        "Epj":"Epistle of Jeremiah",
-        "Sus":"Susanna",
-        "Bel":"Bel and the Dragon",
-        "Man":"Prayer of Manasseh",
-        "Ma1":"1 Macabees",
-        "Ma2":"2 Macabees",
-        "Ma3":"3 Macabees",
-        "Ma4":"4 Macabees",
-        "Sir":"Sirach",
-        "Aza":"Prayer of Azariah",
-        "Lao":"Laodiceans",
-        "Jsb":"Joshua B",
-        "Jsa":"Joshua A",
-        "Jdb":"Judges B",
-        "Jda":"Judges A",
-        "Toa":"Tobit BA",
-        "Tos":"Tobit S",
-        "Pss":"Psalms of Solomon",
-        "Bet":"Bel and the Dragon Th",
-        "Dat":"Daniel Th",
-        "Sut":"Susanna Th",
-        "Ode":"Odes",
-        "Mat":"Matthew",
-        "Mar":"Mark",
-        "Luk":"Luke",
-        "Joh":"John",
-        "Act":"Acts",
-        "Rom":"Romans",
-        "Co1":"1 Corinthians",
-        "Co2":"2 Corinthians",
-        "Gal":"Galatians",
-        "Eph":"Ephesians",
-        "Phi":"Philippians",
-        "Col":"Colossians",
-        "Th1":"1 Thessalonians",
-        "Th2":"2 Thessalonians",
-        "Ti1":"1 Timothy",
-        "Ti2":"2 Timothy",
-        "Tit":"Titus",
-        "Plm":"Philemon",
-        "Heb":"Hebrews",
-        "Jam":"James",
-        "Pe1":"1 Peter",
-        "Pe2":"2 Peter",
-        "Jo1":"1 John",
-        "Jo2":"2 John",
-        "Jo3":"3 John",
-        "Jde":"Jude",
-        "Rev":"Revelation",
-    ];
 
     @IBOutlet weak var searchBar: UISearchBar!
     let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
@@ -237,20 +140,19 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
     }
 
     private func loadData() {
-        let path = NSBundle.mainBundle().pathForResource("kjvdat", ofType: "txt")
+        let path = NSBundle.mainBundle().pathForResource("top1000bible", ofType: "txt")
         var error: NSError? = NSError()
         if let fileStr = String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: &error) {
-            var quotesArray = split(fileStr) { $0 == "\r\n"}
+            var quotesArray = split(fileStr) { $0 == "\n"}
             for line in quotesArray {
-                var bibleQuote = split(line) { $0 == "|" }
-                let fileName = bibleQuote[0].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-                let book = bibleTitles[fileName] ?? fileName
-                let chapterNum = countElements(bibleQuote[1]) > 1 ? bibleQuote[1] : "0\(bibleQuote[1])"
-                let verseNum = countElements(bibleQuote[2]) > 1 ? bibleQuote[2] : "0\(bibleQuote[2])"
-                let text = bibleQuote[3].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-                let quote: Quote = createQuote("\(book) [\(chapterNum):\(verseNum)]", text: text)
-                let group = getGroup(book)
-                quote.addGroup(group)
+                if !line.isEmpty {
+                    var bibleQuote = split(line) { $0 == "|" }
+                    let verse = bibleQuote[0].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                    let text = bibleQuote[1].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) + " \(verse)"
+                    let quote: Quote = createQuote(verse, text: text)
+                    let group = getGroup("Bible Verses")
+                    quote.addGroup(group)
+                }
             }
         }
     }

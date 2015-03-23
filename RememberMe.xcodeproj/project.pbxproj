@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7015F6831AAD6C53004C58DD /* QuoteSaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015F6821AAD6C53004C58DD /* QuoteSaveViewController.swift */; };
 		7018F78E1AA6BE6300364B85 /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7018F78D1AA6BE6300364B85 /* QuoteTableViewCell.swift */; };
+		7024312A1ABFFA8800A3C429 /* top1000bible.txt in Resources */ = {isa = PBXBuildFile; fileRef = 702431291ABFFA8800A3C429 /* top1000bible.txt */; };
 		7045762B1AB23F8200870E78 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7045762A1AB23F8200870E78 /* SettingTableViewController.swift */; };
 		705BABD01AA66C80003A20C5 /* QuotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705BABCF1AA66C80003A20C5 /* QuotesTableViewController.swift */; };
 		7087CE521AA9975200190F73 /* QuoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7087CE511AA9975200190F73 /* QuoteDetailViewController.swift */; };
@@ -21,7 +22,6 @@
 		70D4CAAC1AA9294B001DAD20 /* StudyQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D4CAAB1AA9294B001DAD20 /* StudyQuoteViewController.swift */; };
 		70E15F761AB0FBEA003CC864 /* QuoteGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E15F751AB0FBEA003CC864 /* QuoteGroup.swift */; };
 		70E4A6571ABE7A6A00B705BD /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E4A6561ABE7A6A00B705BD /* Quote.swift */; };
-		70E9DCA21AAEC4FA00A8A4BE /* kjvdat.txt in Resources */ = {isa = PBXBuildFile; fileRef = 70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */; };
 		70E9DCB81AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */; };
 		70E9DCBA1AAF945300A8A4BE /* QuoteGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */; };
 		70F2AC781ABB435C00660A75 /* Settings-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F2AC771ABB435C00660A75 /* Settings-32.png */; };
@@ -45,6 +45,7 @@
 /* Begin PBXFileReference section */
 		7015F6821AAD6C53004C58DD /* QuoteSaveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteSaveViewController.swift; sourceTree = "<group>"; };
 		7018F78D1AA6BE6300364B85 /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
+		702431291ABFFA8800A3C429 /* top1000bible.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = top1000bible.txt; path = ../top1000bible.txt; sourceTree = "<group>"; };
 		7045762A1AB23F8200870E78 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		705BABCF1AA66C80003A20C5 /* QuotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotesTableViewController.swift; sourceTree = "<group>"; };
 		7087CE511AA9975200190F73 /* QuoteDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteDetailViewController.swift; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		70D4CAAB1AA9294B001DAD20 /* StudyQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQuoteViewController.swift; sourceTree = "<group>"; };
 		70E15F751AB0FBEA003CC864 /* QuoteGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroup.swift; sourceTree = "<group>"; };
 		70E4A6561ABE7A6A00B705BD /* Quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
-		70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kjvdat.txt; sourceTree = "<group>"; };
 		70E9DCB71AAF8B9700A8A4BE /* QuoteGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupsTableViewController.swift; sourceTree = "<group>"; };
 		70E9DCB91AAF945300A8A4BE /* QuoteGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteGroupTableViewCell.swift; sourceTree = "<group>"; };
 		70F2AC771ABB435C00660A75 /* Settings-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings-32.png"; sourceTree = "<group>"; };
@@ -136,11 +136,11 @@
 		70C2E0F61AA66BDA00DD09B8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				702431291ABFFA8800A3C429 /* top1000bible.txt */,
 				70F2AC7D1ABB440C00660A75 /* Quote-32.png */,
 				70F2AC7B1ABB43E500660A75 /* User Male Circle-32.png */,
 				70F2AC791ABB439700660A75 /* Star-32.png */,
 				70F2AC771ABB435C00660A75 /* Settings-32.png */,
-				70E9DCA11AAEC4FA00A8A4BE /* kjvdat.txt */,
 				70C2E0F71AA66BDA00DD09B8 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -243,7 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70E9DCA21AAEC4FA00A8A4BE /* kjvdat.txt in Resources */,
+				7024312A1ABFFA8800A3C429 /* top1000bible.txt in Resources */,
 				70F2AC781ABB435C00660A75 /* Settings-32.png in Resources */,
 				70C2E1011AA66BDB00DD09B8 /* Main.storyboard in Resources */,
 				70C2E1061AA66BDB00DD09B8 /* LaunchScreen.xib in Resources */,
