@@ -14,49 +14,54 @@ struct TXTURL {
     static let Key = "TXTURL URL Key"
 }
 
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
     let userDefaults = NSUserDefaults.standardUserDefaults()
 
+        private func loadInitialQuotes() {
+        let managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
+        let path = NSBundle.mainBundle().pathForResource("top1000bible", ofType: "txt")
+        var error: NSError? = NSError()
+        if let fileStr = String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: &error) {
+            var quotesArray = split(fileStr) { $0 == "\n"}
+            for line in quotesArray {
+                if !line.isEmpty {
+                    var bibleQuote = split(line) { $0 == "|" }
+                    let verse = bibleQuote[0].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                    let text = bibleQuote[1].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) + " \(verse)"
+                    let quote: Quote = Quote.createQuote(verse, text: text, managedObjectContext: managedObjectContext)
+                    let group = QuoteGroup.getGroup("Bible Verses", managedObjectContext: managedObjectContext)
+                    quote.addGroup(group)
+                }
+            }
+        }
+    }
+
     private func initializeVariables() {
-        if userDefaults.valueForKey("shakeEnabled") == nil {
-            userDefaults.setBool(true, forKey: "shakeEnabled")
-        }
-        if userDefaults.valueForKey("minHidden") == nil {
-            userDefaults.setInteger(1, forKey: "minHidden")
-        }
-        if userDefaults.valueForKey("maxHidden") == nil {
-            userDefaults.setInteger(1, forKey: "maxHidden")
-        }
-        if userDefaults.valueForKey("numAttempts") == nil {
-            userDefaults.setInteger(5, forKey: "numAttempts")
-        }
-        if userDefaults.valueForKey("memorized") == nil {
-            userDefaults.setValue([String](), forKey: "memorized")
-        }
-        if userDefaults.valueForKey("inProgress") == nil {
-            userDefaults.setValue([String](), forKey: "inProgress")
-        }
-        if userDefaults.valueForKey("recent") == nil {
-            userDefaults.setValue([String](), forKey: "recent")
-        }
-        if userDefaults.valueForKey("favorites") == nil {
-            userDefaults.setValue([String](), forKey: "favorites")
-        }
-        if userDefaults.valueForKey("timeStudying") == nil {
-            userDefaults.setDouble(0.0, forKey: "timeStudying")
-        }
-        if userDefaults.valueForKey("wps") == nil {
-            userDefaults.setDouble(0.0, forKey: "wps")
-        }
+        userDefaults.setBool(true, forKey: "shakeEnabled")
+        userDefaults.setInteger(1, forKey: "minHidden")
+        userDefaults.setInteger(1, forKey: "maxHidden")
+        userDefaults.setInteger(5, forKey: "numAttempts")
+        userDefaults.setValue([String](), forKey: "memorized")
+        userDefaults.setValue([String](), forKey: "inProgress")
+        userDefaults.setValue([String](), forKey: "recent")
+        userDefaults.setValue([String](), forKey: "favorites")
+        userDefaults.setDouble(0.0, forKey: "timeStudying")
+        userDefaults.setDouble(0.0, forKey: "wps")
         userDefaults.synchronize()
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        initializeVariables()
+        if !userDefaults.boolForKey("didLaunch") { //First Launch
+            loadInitialQuotes()
+            initializeVariables()
+            userDefaults.setBool(true, forKey: "didLaunch")
+            userDefaults.synchronize()
+        }
         return true
     }
     

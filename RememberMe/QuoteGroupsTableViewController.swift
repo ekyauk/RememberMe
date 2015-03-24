@@ -18,7 +18,7 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
     lazy var quoteGroups: [[QuoteGroup]] = {
         var groups = [[QuoteGroup]]()
         var allSection = [QuoteGroup]()
-        var allGroup = self.getGroup("All Quotes")
+        var allGroup = QuoteGroup.getGroup("All Quotes", managedObjectContext: self.managedObjectContext)
         let quotesRequest = NSFetchRequest(entityName: "Quote")
         let quotes = self.managedObjectContext.executeFetchRequest(quotesRequest, error: nil) ?? [Quote]()
         allGroup.quotes = NSSet(array: quotes)
@@ -66,7 +66,7 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
         let save: UIAlertAction = UIAlertAction(title: "Save", style: .Default)
             { (action: UIAlertAction!) -> Void in
                 if let tf = alert.textFields?.first as? UITextField {
-                    self.createGroup(tf.text)
+                    QuoteGroup.createGroup(tf.text, managedObjectContext: self.managedObjectContext)
                     self.refresh()
             }
         }
@@ -78,85 +78,18 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
 
     
     private func refresh() {
-        var fetchReq = NSFetchRequest(entityName: "QuoteGroup")
-        var error: NSError? = NSError()
-        var quoteGroup: QuoteGroup?
-        var fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: nil) as? [QuoteGroup]
-        if fetchResults != nil {
-            if fetchResults!.isEmpty {
-                loadData()
-                fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: nil) as [QuoteGroup]?
-            }
-            fetchResults!.filter { $0.name != "All Quotes" }
-            fetchResults!.sort {
+        if var allQuoteGroups = QuoteGroup.all() {
+            allQuoteGroups = allQuoteGroups.filter { $0.name != "All Quotes" }
+            allQuoteGroups.sort {
                 $0.name < $1.name
             }
-            quoteGroups.insert(fetchResults!, atIndex: 1)
+            if quoteGroups.count > 1 {
+                quoteGroups.removeAtIndex(1)
+            }
+            quoteGroups.insert(allQuoteGroups, atIndex: 1)
         }
         tableView.reloadData()
     }
-    private func createQuote(title: String, text: String) -> Quote {
-        let quote = NSEntityDescription.insertNewObjectForEntityForName("Quote", inManagedObjectContext: managedObjectContext) as Quote
-        quote.title = title
-        quote.text = text
-        quote.currentTime = NSDate(timeIntervalSinceReferenceDate: 0)
-        return quote
-    }
-    
-    func clearAllData() {
-        let oldRequest = NSFetchRequest(entityName: "Quote")
-        if let oldRequest = managedObjectContext.executeFetchRequest(oldRequest, error: nil) as? [Quote] {
-            for quote in oldRequest {
-                managedObjectContext.deleteObject(quote)
-            }
-        }
-        let oldGroupRequest = NSFetchRequest(entityName: "QuoteGroup")
-        if let oldGroupRequest = managedObjectContext.executeFetchRequest(oldGroupRequest, error: nil) as? [QuoteGroup] {
-            for quote in oldGroupRequest {
-                managedObjectContext.deleteObject(quote)
-            }
-        }
-        
-    }
-    
-    private func createGroup(name: String) -> QuoteGroup? {
-        let quoteGroup = NSEntityDescription.insertNewObjectForEntityForName("QuoteGroup", inManagedObjectContext: managedObjectContext) as? QuoteGroup
-        quoteGroup?.name = name
-        return quoteGroup
-    }
-    private func getGroup(name: String) -> QuoteGroup {
-        var fetchReq = NSFetchRequest(entityName: "QuoteGroup")
-        var error: NSError? = NSError()
-        fetchReq.predicate = NSPredicate(format: "name = %@", argumentArray: [name])
-        var quoteGroup: QuoteGroup?
-        if let fetchResults = managedObjectContext.executeFetchRequest(fetchReq, error: &error) {
-            if fetchResults.isEmpty {
-                quoteGroup = createGroup(name)
-            } else {
-                quoteGroup = fetchResults[0] as? QuoteGroup
-            }
-        }
-        return quoteGroup!
-    }
-
-    private func loadData() {
-        let path = NSBundle.mainBundle().pathForResource("top1000bible", ofType: "txt")
-        var error: NSError? = NSError()
-        if let fileStr = String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: &error) {
-            var quotesArray = split(fileStr) { $0 == "\n"}
-            for line in quotesArray {
-                if !line.isEmpty {
-                    var bibleQuote = split(line) { $0 == "|" }
-                    let verse = bibleQuote[0].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-                    let text = bibleQuote[1].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) + " \(verse)"
-                    let quote: Quote = createQuote(verse, text: text)
-                    let group = getGroup("Bible Verses")
-                    quote.addGroup(group)
-                }
-            }
-        }
-    }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -173,7 +106,7 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
                     if quoteArr.count >= 2 {
                         let title = quoteArr[0]
                         let text = quoteArr[1]
-                        self.performSegueWithIdentifier("textFileSave", sender: self.createQuote(title, text: text))
+                        self.performSegueWithIdentifier("textFileSave", sender: Quote.createQuote(title, text: text, managedObjectContext: self.managedObjectContext))
                     }
                 }
             }
@@ -185,6 +118,17 @@ class QuoteGroupsTableViewController: UITableViewController, UISearchBarDelegate
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        var allSection = [QuoteGroup]()
+        var allGroup = QuoteGroup.getGroup("All Quotes", managedObjectContext: self.managedObjectContext)
+        let quotesRequest = NSFetchRequest(entityName: "Quote")
+        let quotes = self.managedObjectContext.executeFetchRequest(quotesRequest, error: nil) ?? [Quote]()
+        allGroup.quotes = NSSet(array: quotes)
+        allSection.insert(allGroup, atIndex: 0)
+        quoteGroups.removeAtIndex(0)
+        quoteGroups.insert(allSection, atIndex: 0)
+    }
     override func viewWillDisappear(animated: Bool) {
         var error: NSError? = NSError()
         if !managedObjectContext.save(&error) {
